@@ -53,15 +53,13 @@ function withMainLayout(/* no args option yet, but could pass them here */) {
 
         return (
           <div id="appContainer">
-            <NavigationBar
-              brand={navModel.brand}
-              navModel={navModel}
-              handleLeftNavItemClick={this.handleLeftNavItemClick}
-              handleRightNavItemClick={this.handleRightNavItemClick}
-            />
-            <div className="container-fluid">
-              <BaseComponent {...passProps} />
-            </div>
+            {/*<NavigationBar*/}
+              {/*brand={navModel.brand}*/}
+              {/*navModel={navModel}*/}
+              {/*handleLeftNavItemClick={this.handleLeftNavItemClick}*/}
+              {/*handleRightNavItemClick={this.handleRightNavItemClick}*/}
+            {/*/>*/}
+            <BaseComponent {...passProps} />
             <BackToTop minScrollY={40} scrollTo={'appContainer'} />
           </div>
         );

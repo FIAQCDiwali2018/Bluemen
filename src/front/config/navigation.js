@@ -16,7 +16,7 @@ export type Navigation = {
 // #endregion
 
 const navigation = {
-  brand: 'React Redux Bootstrap Starter',
+  brand: 'Blue Men Quiz',
   leftLinks: [],
   rightLinks: [
     {
