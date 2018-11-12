@@ -8,5 +8,5 @@ public/assets/
 /coverage
 /.nyc_output
 docs/
-
+docs/assets/
 .DS_Store
