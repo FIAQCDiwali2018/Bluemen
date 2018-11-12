@@ -22,13 +22,28 @@ class WordCloud extends PureComponent<Props, State> {
 
   // #region lifecycle
   render() {
-    return (<WordCloudComponent width={400} data={this.props.data} fontSizeMapper={word => Math.log2(word.value) * 5} />);
+    return (<WordCloudComponent width={400} height={300} data={this.props.data} fontSizeMapper={word => Math.log2(word.value) * 5} />);
   }
   // #endregion
 }
 
 WordCloud.defaultProps = {
   data: [
+    {text: 'Indore', value: 1000},
+    {text: 'Agra', value: 200},
+    {text: 'Jabalpur', value: 800},
+    {text: 'Delhi', value: 1000000},
+    {text: 'Tamil Nadu', value: 10},
+    {text: 'Indore', value: 1000},
+    {text: 'Agra', value: 200},
+    {text: 'Jabalpur', value: 800},
+    {text: 'Delhi', value: 1000000},
+    {text: 'Tamil Nadu', value: 10},
+    {text: 'Indore', value: 1000},
+    {text: 'Agra', value: 200},
+    {text: 'Jabalpur', value: 800},
+    {text: 'Delhi', value: 1000000},
+    {text: 'Tamil Nadu', value: 10},
     {text: 'Indore', value: 1000},
     {text: 'Agra', value: 200},
     {text: 'Jabalpur', value: 800},

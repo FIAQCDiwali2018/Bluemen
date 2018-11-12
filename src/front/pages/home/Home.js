@@ -106,24 +106,33 @@ class Home extends PureComponent<Props, State> {
       <div>
           <Grid>
             <Row>
-              <Col xs={12} md={12}>
-                <Header>
-                  <H1>Blue Men Quiz</H1>
-                </Header>
-                <div>
-                  <ul>
-                    <li>1. Register to 883344 with your name, city, country</li>
-                    <li>2. Right side will be Quiz Questiona with 4 options. Please ans one of the option for the question.</li>
-                  </ul>
-                </div>
-              </Col>
-            </Row>
-            <Row className="show-grid">
               <Col xs={12} md={8}>
-                text
+                <Row>
+                  <Col>
+                    <Header>
+                      <H1>Blue Men Quiz</H1>
+                    </Header>
+                    <div>
+                      <ul>
+                        <li>1. Register to 883344 with your name, city, country</li>
+                        <li>2. Right side will be Quiz Questiona with 4 options. Please ans one of the option for the question.</li>
+                      </ul>
+                    </div>
+                  </Col>
+                </Row>
+                <Row>Text</Row>
               </Col>
               <Col xs={12} md={4}>
-                <WordCloud/>
+                <Row className="show-grid">
+                  <Col xs={12} md={12}>
+                    <WordCloud/>
+                  </Col>
+                </Row>
+                <Row className="show-grid">
+                  <Col xs={12} md={12}>
+
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </Grid>
