@@ -120,7 +120,7 @@ class Home extends PureComponent<Props, State> {
             </Row>
             <Row className="show-grid">
               <Col xs={12} md={8}>
-                Left test
+                text
               </Col>
               <Col xs={12} md={4}>
                 <WordCloud/>
