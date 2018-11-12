@@ -7,5 +7,6 @@ dist/
 public/assets/
 /coverage
 /.nyc_output
+docs/
 
 .DS_Store
