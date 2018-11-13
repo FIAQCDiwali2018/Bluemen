@@ -27,9 +27,75 @@ const expressServer = (app = null, isDev = false) => {
     express.static(path.join(__dirname, DOCS_PATH, 'assets/')),
   );
 
-  app.get('/*', (req, res) =>
+  app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, DOCS_PATH, 'index.html')),
   );
+
+  app.get('/results', (req, res) =>
+    res.send("{ \n" +
+      "    \"top3\" : [\n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097789903\", \n" +
+      "            \"timeTakenMillis\" : 5000.0\n" +
+      "        }, \n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097789878\", \n" +
+      "            \"timeTakenMillis\" : 6000.0\n" +
+      "        }, \n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097213333\", \n" +
+      "            \"timeTakenMillis\" : 7000.0\n" +
+      "        }\n" +
+      "    ]\n" +
+      "}"),
+  );
+
+  app.get('/results/:questionGuid', (req, res) =>
+    res.send("{ \n" +
+      "    \"top3\" : [\n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097789903\", \n" +
+      "            \"timeTakenMillis\" : 5000.0\n" +
+      "        }, \n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097789878\", \n" +
+      "            \"timeTakenMillis\" : 6000.0\n" +
+      "        }, \n" +
+      "        {\n" +
+      "            \"phoneNumber\" : \"+13097213333\", \n" +
+      "            \"timeTakenMillis\" : 7000.0\n" +
+      "        }\n" +
+      "    ]\n" +
+      "}"),
+  );
+
+  app.get('/questions/next', (req, res) =>
+    res.send("{\"question\" : \"Who is the president of the United States of America\", \n" +
+      "    \"options\" : {\n" +
+      "        \"A\" : \"George Washington\", \n" +
+      "        \"B\" : \"Donald Trump\", \n" +
+      "        \"C\" : \"Barack Obama\", \n" +
+      "        \"D\" : \"George W. Bush\"\n" +
+      "    }, \n" +
+      "    \"answer\" : \"B\"}"),
+  );
+
+  app.get('/questions/current', (req, res) =>
+    res.send("{\"question\" : \"Who is the president of the United States of America\", \n" +
+      "    \"options\" : {\n" +
+      "        \"A\" : \"George Washington\", \n" +
+      "        \"B\" : \"Donald Trump\", \n" +
+      "        \"C\" : \"Barack Obama\", \n" +
+      "        \"D\" : \"George W. Bush\"\n" +
+      "    }, \n" +
+      "    \"answer\" : \"B\"}"),
+  );
+
+  app.post('/restartQuiz', (req, res) =>
+    res.send("Quiz restarted"),
+  );
+
+  app.get('/')
 
   app.use(error404);
   app.use(error500);
