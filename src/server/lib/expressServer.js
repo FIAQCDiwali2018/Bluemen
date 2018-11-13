@@ -7,12 +7,43 @@ const chalk = require('chalk');
 const { error404, error500 } = require('../middleware/errors');
 const config = require('../config');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-
 // #endregion
 
 // #region constants
 const DOCS_PATH = '../../../docs/';
 // #endregion
+
+class UserAnswer {
+  constructor(phoneNumber, timeTaken) {
+    this.phoneNumber = phoneNumber;
+    this.timeTaken = timeTaken;
+  }
+}
+
+class Question {
+  constructor(question, answer) {
+    this.question = question;
+    this.answer = answer;
+    this.timestamp = Date.now();
+    this.top10 = [];
+  }
+
+  processAnswer(phoneNumber, answer) {
+    if(answer.toUpperCase() === this.answer.toUpperCase()) {
+      var timeTaken = Date.now() - this.timestamp;
+      this.top10 = this.top10.sort((a,b) => a.timeTaken - b.timeTaken);
+      if(this.top10.length < 10) {
+        this.top10.insert(UserAnswer(phoneNumber, timeTaken));
+      } else {
+        if(this.top10.last().timeTaken > timeTaken) {
+          this.top10 = this.top10.splice(9,1,UserAnswer(phoneNumber, timeTaken));
+        }
+      }
+    }
+  }
+}
+
+var currentQuestion = Question("Hello, World!", "A");
 
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
