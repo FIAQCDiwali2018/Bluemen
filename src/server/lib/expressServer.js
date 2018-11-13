@@ -33,17 +33,17 @@ class Question {
       var timeTaken = Date.now() - this.timestamp;
       this.top10 = this.top10.sort((a,b) => a.timeTaken - b.timeTaken);
       if(this.top10.length < 10) {
-        this.top10.insert(UserAnswer(phoneNumber, timeTaken));
+        this.top10.insert(new UserAnswer(phoneNumber, timeTaken));
       } else {
         if(this.top10.last().timeTaken > timeTaken) {
-          this.top10 = this.top10.splice(9,1,UserAnswer(phoneNumber, timeTaken));
+          this.top10 = this.top10.splice(9,1,new UserAnswer(phoneNumber, timeTaken));
         }
       }
     }
   }
 }
 
-var currentQuestion = Question("Hello, World!", "A");
+var currentQuestion = new Question("Hello, World!", "A");
 
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
