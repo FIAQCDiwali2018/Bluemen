@@ -11,6 +11,7 @@ import SplitPane from 'react-split-pane';
 import styled from 'styled-components';
 import {Col, Grid, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
+import QuizComponent from "../quiz/QuizComponent";
 // #endregion
 
 // #region flow types
@@ -120,7 +121,9 @@ class Home extends PureComponent<Props, State> {
                     </div>
                   </Col>
                 </Row>
-                <Row>Text</Row>
+                <Row>
+                  <QuizComponent/>
+                </Row>
               </Col>
               <Col xs={12} md={4}>
                 <Row className="show-grid">
@@ -130,7 +133,6 @@ class Home extends PureComponent<Props, State> {
                 </Row>
                 <Row className="show-grid">
                   <Col xs={12} md={12}>
-
                   </Col>
                 </Row>
               </Col>
