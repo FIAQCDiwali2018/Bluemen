@@ -12,6 +12,8 @@ import ScrollTop from './components/scrollToTop/ScrollToTop';
 import withMainLayout from './hoc/withMainLayout';
 import MainRoutes from './routes/MainRoutes';
 import { PageNotFound } from './routes/routes';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 // #endregion
 
 // #region flow types
