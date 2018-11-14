@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import {Col, Grid, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
 import QuizComponent from "../quiz/QuizComponent";
+import Result from "../../components/Result";
 // #endregion
 
 // #region flow types
@@ -123,6 +124,9 @@ class Home extends PureComponent<Props, State> {
                 </Row>
                 <Row>
                   <QuizComponent/>
+                </Row>
+                <Row>
+                  <Result/>
                 </Row>
               </Col>
               <Col xs={12} md={4}>

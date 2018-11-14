@@ -1,27 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+import React, {Component} from 'react';
+import {Well} from 'react-bootstrap'
 
-function Result(props) {
-  return (
-    <CSSTransitionGroup
-      className="container result"
-      component="div"
-      transitionName="fade"
-      transitionEnterTimeout={800}
-      transitionLeaveTimeout={500}
-      transitionAppear
-      transitionAppearTimeout={500}
-    >
+class Result extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      top10: [{phoneNumber: '', timeTaken: ''}],
+    };
+  }
+
+
+  callApi = async (api) => {
+    const response = await fetch(api);
+    const body = await response.json();
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
+
+  componentDidMount() {
+    setInterval(() => {
+      this.callApi('/questions/current')
+        .then(resp => this.setState({top10: resp.top10}))
+        .catch(err => console.log(err));
+      this.forceUpdate();
+    }, 2000);
+  }
+
+  render() {
+    return (
       <div>
-        You prefer <strong>{props.quizResult}</strong>!
+        {this.state.top10.map((person, index) => <Well
+          key={index}
+          bsSize="small">{`${person.phoneNumber}: ${person.timeTaken / 1000}`}</Well>)}
       </div>
-    </CSSTransitionGroup>
-  );
+    );
+  }
 }
-
-Result.propTypes = {
-  quizResult: PropTypes.string.isRequired
-};
 
 export default Result;

@@ -11,8 +11,8 @@ function Quiz(props) {
       className="container"
       component="div"
       transitionName="fade"
-      transitionEnterTimeout={400}
-      transitionLeaveTimeout={500}
+      transitionEnterTimeout={800}
+      transitionLeaveTimeout={100}
       transitionAppear
       transitionAppearTimeout={500}
     >

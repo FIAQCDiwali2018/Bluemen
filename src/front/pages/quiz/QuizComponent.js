@@ -25,6 +25,12 @@ class QuizComponent extends Component {
     return body;
   };
 
+  UNSAFE_componentWillMount(){
+    this.callApi('/restartQuiz')
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+
   componentDidMount() {
     this.callApi('/questions/current')
       .then(res => this.updateState(res))
