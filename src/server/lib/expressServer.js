@@ -35,12 +35,14 @@ class Question {
       var timeTaken = Date.now() - this.timestamp;
       this.top10 = this.top10.sort((a,b) => a.timeTaken - b.timeTaken);
       if(this.top10.length < 10) {
-        this.top10.insert(new UserAnswer(phoneNumber, timeTaken));
+        this.top10.push(new UserAnswer(phoneNumber, timeTaken));
       } else {
         if(this.top10.last().timeTaken > timeTaken) {
           this.top10 = this.top10.splice(9,1,new UserAnswer(phoneNumber, timeTaken));
         }
       }
+    }else{
+      this.top10 = this.top10.filter(userObj => userObj.phoneNumber !== phoneNumber);
     }
   }
 }
@@ -129,21 +131,20 @@ const expressServer = (app = null, isDev = false) => {
   app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
 
-    console.log(req.body.Body);
-    console.log(req.body.From);
-    console.log(req.body);
-    if (req.body.Body == 'Hello' || req.body.Body == 'hello') {
-      twiml.message('Hi, From FIAQC!');
-    } else if (req.body.Body == 'bye' || req.body.Body == 'Bye') {
-      twiml.message('Goodbye, From FIAQC');
-    } else {
-      twiml.message(
-        'We have received your Answer, From FIAQC!!!'
-      );
-    }
-
-    res.writeHead(200, { 'Content-Type': 'text/xml' });
-    res.end(twiml.toString());
+    if(req.body.Body.toUpperCase() == 'A' || req.body.Body.toUpperCase() == 'B' || req.body.Body.toUpperCase() == 'C' || req.body.Body.toUpperCase() == 'D'){
+          currentQuestion.processAnswer(req.body.From, req.body.Body);
+          twiml.message('We have received your Answer, From FIAQC!!!');
+      }else{
+        if (req.body.Body == 'Hello' || req.body.Body == 'hello') {
+          twiml.message('Hi, From FIAQC!');
+        } else if (req.body.Body == 'bye' || req.body.Body == 'Bye') {
+          twiml.message('Good-bye, From FIAQC');
+        } else {
+          twiml.message('We have received your Answer, From FIAQC!!!');
+        }
+      }
+      res.writeHead(200, { 'Content-Type': 'text/xml' });
+      res.end(twiml.toString());
   });
 
   app.get('/restartQuiz', (req, res) => {
