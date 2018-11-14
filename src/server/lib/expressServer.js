@@ -35,6 +35,7 @@ class Question {
       var timeTaken = Date.now() - this.timestamp;
       this.top10 = this.top10.sort((a,b) => a.timeTaken - b.timeTaken);
       if(this.top10.length < 10) {
+        this.top10 = this.top10.filter(userObj => userObj.phoneNumber !== phoneNumber);
         this.top10.push(new UserAnswer(phoneNumber, timeTaken));
       } else {
         if(this.top10.last().timeTaken > timeTaken) {
