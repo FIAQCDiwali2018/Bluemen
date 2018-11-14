@@ -45,8 +45,9 @@ class Question {
   }
 }
 
-var questions = questionsDb.splice(0);
+var questions = questionsDb.slice(0);
 var currentQuestion = new Question("Hello, World!", "", "");
+var results = [];
 
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
@@ -68,48 +69,19 @@ const expressServer = (app = null, isDev = false) => {
   );
 
   app.get('/results', (req, res) =>
-    res.send("{ \n" +
-      "    \"top3\" : [\n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097789903\", \n" +
-      "            \"timeTakenMillis\" : 5000.0\n" +
-      "        }, \n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097789878\", \n" +
-      "            \"timeTakenMillis\" : 6000.0\n" +
-      "        }, \n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097213333\", \n" +
-      "            \"timeTakenMillis\" : 7000.0\n" +
-      "        }\n" +
-      "    ]\n" +
-      "}"),
+    res.send(results),
   );
 
   app.get('/results/:questionGuid', (req, res) =>
-    res.send("{ \n" +
-      "    \"top3\" : [\n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097789903\", \n" +
-      "            \"timeTakenMillis\" : 5000.0\n" +
-      "        }, \n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097789878\", \n" +
-      "            \"timeTakenMillis\" : 6000.0\n" +
-      "        }, \n" +
-      "        {\n" +
-      "            \"phoneNumber\" : \"+13097213333\", \n" +
-      "            \"timeTakenMillis\" : 7000.0\n" +
-      "        }\n" +
-      "    ]\n" +
-      "}"),
+    res.send("Not Implemented"),
   );
 
   app.get('/questions/next', (req, res) => {
-    if(currentQuestion.question !== "Hello, World!" || currentQuestion.question !== "") {
+    if(currentQuestion.question !== "Hello, World!" && currentQuestion.question !== "") {
       console.log("Calculate Results.");
+      results.push(currentQuestion.top10)
     } else {
-      console.log("Will not calculate results, since its the first question");
+      console.log("Will not calculate results, since its the first question or empty question");
     }
 
     if(questions.length != 0) {
@@ -149,7 +121,8 @@ const expressServer = (app = null, isDev = false) => {
   app.get('/restartQuiz', (req, res) => {
       currentQuestion = new Question("Hello, World!", "", "");
       questions = questionsDb.slice(0);
-      res.send("Quiz restarted")
+      results = [];
+      res.send("Quiz restarted");
     },
   );
 
