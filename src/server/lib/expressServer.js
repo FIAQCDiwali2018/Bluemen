@@ -7,6 +7,7 @@ const chalk = require('chalk');
 const { error404, error500 } = require('../middleware/errors');
 const config = require('../config');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const questions = require('../config/questions.json').questions;
 // #endregion
 
 // #region constants
@@ -102,26 +103,24 @@ const expressServer = (app = null, isDev = false) => {
       "}"),
   );
 
-  app.get('/questions/next', (req, res) =>
-    res.send("{\"question\" : \"Who is the president of the United States of America\", \n" +
-      "    \"options\" : {\n" +
-      "        \"A\" : \"George Washington\", \n" +
-      "        \"B\" : \"Donald Trump\", \n" +
-      "        \"C\" : \"Barack Obama\", \n" +
-      "        \"D\" : \"George W. Bush\"\n" +
-      "    }, \n" +
-      "    \"answer\" : \"B\"}"),
+  app.get('/questions/next', (req, res) => {
+    if(currentQuestion.question !== "Hello, World!" || currentQuestion.question !== "") {
+      console.log("Calculate Results.");
+    } else {
+      console.log("Will not calculate results, since its the first question");
+    }
+
+    if(questions.length != 0) {
+      currentQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1);
+      res.send(currentQuestion);
+    } else {
+      res.send(new Question("", ""));
+    }
+    },
   );
 
   app.get('/questions/current', (req, res) =>
-    res.send("{\"question\" : \"Who is the president of the United States of America\", \n" +
-      "    \"options\" : {\n" +
-      "        \"A\" : \"George Washington\", \n" +
-      "        \"B\" : \"Donald Trump\", \n" +
-      "        \"C\" : \"Barack Obama\", \n" +
-      "        \"D\" : \"George W. Bush\"\n" +
-      "    }, \n" +
-      "    \"answer\" : \"B\"}"),
+    res.send(currentQuestion),
   );
 
   app.post('/sms', (req, res) => {
