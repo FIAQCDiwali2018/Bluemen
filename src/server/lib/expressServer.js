@@ -4,7 +4,7 @@
 const express = require('express');
 const path = require('path');
 const chalk = require('chalk');
-const { error404, error500 } = require('../middleware/errors');
+const {error404, error500} = require('../middleware/errors');
 const config = require('../config');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const questionsDb = require('../config/questions.json').questions;
@@ -12,6 +12,7 @@ const questionsDb = require('../config/questions.json').questions;
 
 // #region constants
 const DOCS_PATH = '../../../docs/';
+
 // #endregion
 
 class UserAnswer {
@@ -31,25 +32,32 @@ class Question {
   }
 
   processAnswer(phoneNumber, answer) {
-    if(answer.toUpperCase() === this.answer.toUpperCase()) {
+    if (answer.toUpperCase() === this.answer.toUpperCase()) {
       var timeTaken = Date.now() - this.timestamp;
-      this.top10 = this.top10.sort((a,b) => a.timeTaken - b.timeTaken);
-      if(this.top10.length < 10) {
+      this.top10 = this.top10.sort((a, b) => a.timeTaken - b.timeTaken);
+      if (this.top10.length < 10) {
         this.top10 = this.top10.filter(userObj => userObj.phoneNumber !== phoneNumber);
         this.top10.push(new UserAnswer(phoneNumber, timeTaken));
       } else {
-        if(this.top10.last().timeTaken > timeTaken) {
-          this.top10 = this.top10.splice(9,1,new UserAnswer(phoneNumber, timeTaken));
+        if (this.top10.last().timeTaken > timeTaken) {
+          this.top10 = this.top10.splice(9, 1, new UserAnswer(phoneNumber, timeTaken));
         }
       }
-    }else{
+    } else {
       this.top10 = this.top10.filter(userObj => userObj.phoneNumber !== phoneNumber);
     }
   }
 }
 
 var questions = questionsDb.slice(0);
-var currentQuestion = new Question("Hello, World!", "", "");
+var firstQuestion = new Question('Who is the current president of FIAQC', 'D',
+  {
+    "A": "Nitin Vishwakarma",
+    "B": "Kapil Bhawsar",
+    "C": "Mihir Shah",
+    "D": "Tushar Patel",
+  });
+var currentQuestion = firstQuestion;
 var results = [];
 
 // $FlowIgnore
@@ -76,24 +84,19 @@ const expressServer = (app = null, isDev = false) => {
   );
 
   app.get('/results/:questionGuid', (req, res) =>
-    res.send("Not Implemented"),
+    res.send('Not Implemented'),
   );
 
   app.get('/questions/next', (req, res) => {
-    if(currentQuestion.question !== "Hello, World!" && currentQuestion.question !== "") {
-      console.log("Calculate Results.");
-      results.push(currentQuestion.top10)
-    } else {
-      console.log("Will not calculate results, since its the first question or empty question");
-    }
+      results.push(currentQuestion.top10);
 
-    if(questions.length != 0) {
-      var nextQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
-      currentQuestion = new Question(nextQuestion.question, nextQuestion.answer, nextQuestion.options);
-      res.send(currentQuestion);
-    } else {
-      res.send(new Question("", "", ""));
-    }
+      if (questions.length !== 0) {
+        var nextQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
+        currentQuestion = new Question(nextQuestion.question, nextQuestion.answer, nextQuestion.options);
+        res.send(currentQuestion);
+      } else {
+        res.send(new Question('', '', ''));
+      }
     },
   );
 
@@ -104,31 +107,31 @@ const expressServer = (app = null, isDev = false) => {
   app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
 
-    if(req.body.Body.toUpperCase() == 'A' || req.body.Body.toUpperCase() == 'B' || req.body.Body.toUpperCase() == 'C' || req.body.Body.toUpperCase() == 'D'){
-          currentQuestion.processAnswer(req.body.From, req.body.Body);
-          twiml.message('We have received your Answer, From FIAQC!!!');
-      }else{
-        if (req.body.Body == 'Hello' || req.body.Body == 'hello') {
-          twiml.message('Hi, From FIAQC!');
-        } else if (req.body.Body == 'bye' || req.body.Body == 'Bye') {
-          twiml.message('Good-bye, From FIAQC');
-        } else {
-          twiml.message('We have received your Answer, From FIAQC!!!');
-        }
+    if (req.body.Body.toUpperCase() === 'A' || req.body.Body.toUpperCase() === 'B' || req.body.Body.toUpperCase() === 'C' || req.body.Body.toUpperCase() === 'D') {
+      currentQuestion.processAnswer(req.body.From, req.body.Body);
+      twiml.message('We have received your Answer, From FIAQC!!!');
+    } else {
+      if (req.body.Body === 'Hello' || req.body.Body === 'hello') {
+        twiml.message('Hi, From FIAQC!');
+      } else if (req.body.Body === 'bye' || req.body.Body === 'Bye') {
+        twiml.message('Good-bye, From FIAQC');
+      } else {
+        twiml.message('We have received your Answer, From FIAQC!!!');
       }
-      res.writeHead(200, { 'Content-Type': 'text/xml' });
-      res.end(twiml.toString());
+    }
+    res.writeHead(200, {'Content-Type': 'text/xml'});
+    res.end(twiml.toString());
   });
 
   app.get('/restartQuiz', (req, res) => {
-      currentQuestion = new Question("Hello, World!", "", "");
+      currentQuestion = firstQuestion;
       questions = questionsDb.slice(0);
       results = [];
-      res.send("Quiz restarted");
+      res.send('Quiz restarted');
     },
   );
 
-  app.get('/')
+  app.get('/');
 
   app.use(error404);
   app.use(error500);

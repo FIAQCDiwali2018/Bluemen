@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import quizQuestions from './../../api/quizQuestions';
 import Quiz from './../../components/Quiz';
 import Result from './../../components/Result';
-import './Quiz.css';
 
 class QuizComponent extends Component {
   constructor(props) {
@@ -10,83 +8,54 @@ class QuizComponent extends Component {
 
     this.state = {
       counter: 0,
-      questionId: 1,
+      questionId: 0,
       question: '',
-      answerOptions: [],
+      answerOptions: {A:'',B:'',C:'',D:''},
       answer: '',
-      answersCount: {
-        Nintendo: 0,
-        Microsoft: 0,
-        Sony: 0
-      },
-      result: ''
+      result: '',
     };
 
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
   }
 
-  componentWillMount() {
-    const shuffledAnswerOptions = quizQuestions.map(question =>
-      this.shuffleArray(question.answers)
-    );
-    this.setState({
-      question: quizQuestions[0].question,
-      answerOptions: shuffledAnswerOptions[0]
-    });
-  }
+  callApi = async (api) => {
+    const response = await fetch(api);
+    const body = await response.json();
+    if (response.status !== 200) {throw Error(body.message);}
+    return body;
+  };
 
-  shuffleArray(array) {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
+  componentDidMount() {
+    this.callApi('/questions/current')
+      .then(res => this.updateState(res))
+      .catch(err => console.log(err));
   }
 
   handleAnswerSelected(event) {
-    this.setUserAnswer(event.currentTarget.value);
-
-    if (this.state.questionId < quizQuestions.length) {
-      setTimeout(() => this.setNextQuestion(), 300);
-    } else {
-      setTimeout(() => this.setResults(this.getResults()), 300);
-    }
-  }
-
-  setUserAnswer(answer) {
-    this.setState((state, props) => ({
-      answersCount: {
-        ...state.answersCount,
-        [answer]: state.answersCount[answer] + 1
-      },
-      answer: answer
-    }));
+    setTimeout(() => this.setNextQuestion(), 0);
   }
 
   setNextQuestion() {
+    this.callApi('/questions/next')
+      .then(res => this.updateState(res))
+      .catch(err => console.log(err));
+  }
+
+  updateState = (questionObject) =>{
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
-
-    this.setState({
-      counter: counter,
-      questionId: questionId,
-      question: quizQuestions[counter].question,
-      answerOptions: quizQuestions[counter].answers,
-      answer: ''
-    });
-  }
+    if (questionObject && questionObject.question !== '') {
+      this.setState({
+        counter: counter,
+        questionId: questionId,
+        question: questionObject.question,
+        answerOptions: questionObject.options,
+        answer: questionObject.answer,
+      });
+    } else {
+      this.setResults(this.getResults());
+    }
+  };
 
   getResults() {
     const answersCount = this.state.answersCount;
@@ -107,14 +76,14 @@ class QuizComponent extends Component {
 
   renderQuiz() {
     return (
-      <Quiz
+      this.state.questionId > 0 ? <Quiz
         answer={this.state.answer}
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
         question={this.state.question}
-        questionTotal={quizQuestions.length}
+        // questionTotal={quizQuestions.length}
         onAnswerSelected={this.handleAnswerSelected}
-      />
+      /> : ''
     );
   }
 

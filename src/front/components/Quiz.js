@@ -1,40 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
+import {Button} from 'react-bootstrap';
+import {CSSTransitionGroup} from 'react-transition-group';
 import Question from '../components/Question';
-import QuestionCount from '../components/QuestionCount';
 import AnswerOption from '../components/AnswerOption';
 
 function Quiz(props) {
-  function renderAnswerOptions(key) {
-    return (
-      <AnswerOption
-        key={key.content}
-        answerContent={key.content}
-        answerType={key.type}
-        answer={props.answer}
-        questionId={props.questionId}
-        onAnswerSelected={props.onAnswerSelected}
-      />
-    );
-  }
-
   return (
     <CSSTransitionGroup
       className="container"
       component="div"
       transitionName="fade"
-      transitionEnterTimeout={800}
+      transitionEnterTimeout={400}
       transitionLeaveTimeout={500}
       transitionAppear
       transitionAppearTimeout={500}
     >
       <div key={props.questionId}>
-        <QuestionCount counter={props.questionId} total={props.questionTotal} />
+        {/*<QuestionCount counter={props.questionId} total={props.questionTotal} />*/}
         <Question content={props.question} />
-        <ul className="answerOptions">
-          {props.answerOptions.map(renderAnswerOptions)}
-        </ul>
+        <div className="answerOptions">
+          <AnswerOption
+            key="A"
+            label= "A"
+            answerContent={props.answerOptions.A}
+          />
+          <AnswerOption
+            key="B"
+            label= "B"
+            answerContent={props.answerOptions.B}
+          />
+          <AnswerOption
+            key="C"
+            label= "C"
+            answerContent={props.answerOptions.C}
+          />
+          <AnswerOption
+            key="D"
+            label= "D"
+            answerContent={props.answerOptions.D}
+          />
+        </div>
+        <Button onClick={props.onAnswerSelected}>NEXT</Button>
       </div>
     </CSSTransitionGroup>
   );
@@ -42,10 +49,9 @@ function Quiz(props) {
 
 Quiz.propTypes = {
   answer: PropTypes.string.isRequired,
-  answerOptions: PropTypes.array.isRequired,
+  answerOptions: PropTypes.object.isRequired,
   question: PropTypes.string.isRequired,
   questionId: PropTypes.number.isRequired,
-  questionTotal: PropTypes.number.isRequired,
   onAnswerSelected: PropTypes.func.isRequired
 };
 
