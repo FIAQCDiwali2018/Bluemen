@@ -7,7 +7,7 @@ const chalk = require('chalk');
 const { error404, error500 } = require('../middleware/errors');
 const config = require('../config');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const questions = require('../config/questions.json').questions;
+const questionsDb = require('../config/questions.json').questions;
 // #endregion
 
 // #region constants
@@ -22,9 +22,10 @@ class UserAnswer {
 }
 
 class Question {
-  constructor(question, answer) {
+  constructor(question, answer, options) {
     this.question = question;
     this.answer = answer;
+    this.options = options;
     this.timestamp = Date.now();
     this.top10 = [];
   }
@@ -44,7 +45,8 @@ class Question {
   }
 }
 
-var currentQuestion = new Question("Hello, World!", "A");
+var questions = questionsDb.splice(0);
+var currentQuestion = new Question("Hello, World!", "", "");
 
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
@@ -111,10 +113,11 @@ const expressServer = (app = null, isDev = false) => {
     }
 
     if(questions.length != 0) {
-      currentQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1);
+      var nextQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
+      currentQuestion = new Question(nextQuestion.question, nextQuestion.answer, nextQuestion.options);
       res.send(currentQuestion);
     } else {
-      res.send(new Question("", ""));
+      res.send(new Question("", "", ""));
     }
     },
   );
@@ -143,8 +146,11 @@ const expressServer = (app = null, isDev = false) => {
     res.end(twiml.toString());
   });
 
-  app.post('/restartQuiz', (req, res) =>
-    res.send("Quiz restarted"),
+  app.get('/restartQuiz', (req, res) => {
+      currentQuestion = new Question("Hello, World!", "", "");
+      questions = questionsDb.slice(0);
+      res.send("Quiz restarted")
+    },
   );
 
   app.get('/')
