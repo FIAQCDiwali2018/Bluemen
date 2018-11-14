@@ -49,16 +49,22 @@ class Question {
   }
 }
 
-var questions = questionsDb.slice(0);
-var firstQuestion = new Question('Who is the current president of FIAQC', 'D',
-  {
-    "A": "Nitin Vishwakarma",
-    "B": "Kapil Bhawsar",
-    "C": "Mihir Shah",
-    "D": "Tushar Patel",
-  });
-var currentQuestion = firstQuestion;
-var results = [];
+var questions = null;
+var currentQuestion = null;
+var questionResults = null;
+
+restartQuiz();
+
+function getNextQuestion() {
+  var nextQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
+  return new Question(nextQuestion.question, nextQuestion.answer, nextQuestion.options);
+}
+
+function restartQuiz() {
+  questions = questionsDb.slice(0);
+  currentQuestion = getNextQuestion();
+  results = [];
+}
 
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
@@ -88,15 +94,17 @@ const expressServer = (app = null, isDev = false) => {
   );
 
   app.get('/questions/next', (req, res) => {
-      results.push(currentQuestion.top10);
+      if(currentQuestion.question !== '') {
+        results.push(currentQuestion);
+      }
 
       if (questions.length !== 0) {
-        var nextQuestion = questions.splice(Math.floor(Math.random() * questions.length), 1)[0];
-        currentQuestion = new Question(nextQuestion.question, nextQuestion.answer, nextQuestion.options);
-        res.send(currentQuestion);
+        currentQuestion = getNextQuestion();
       } else {
-        res.send(new Question('', '', ''));
+        currentQuestion = new Question('', '', '');
       }
+
+      res.send(currentQuestion);
     },
   );
 
@@ -124,9 +132,7 @@ const expressServer = (app = null, isDev = false) => {
   });
 
   app.get('/restartQuiz', (req, res) => {
-      currentQuestion = firstQuestion;
-      questions = questionsDb.slice(0);
-      results = [];
+      restartQuiz();
       res.send('Quiz restarted');
     },
   );
