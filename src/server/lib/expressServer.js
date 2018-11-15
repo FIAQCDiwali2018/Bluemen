@@ -25,6 +25,29 @@ class UserAnswer {
   }
 }
 
+class UserInfo{
+  constructor(phoneNumber, name, city, state){
+    this.phoneNumber = phoneNumber;
+    this.name= name;
+    this.city= city;
+    this.state = state;
+  }
+}
+
+class CityWithCount{
+  constructor(city, count){
+    this.city=city;
+    this.count=count;
+  }
+}
+
+class StateWithCount{
+  constructor(state, count){
+    this.state=state;
+    this.count=count;
+  }
+}
+
 class Question {
   constructor(question, answer, options) {
     this.question = question;
@@ -82,6 +105,7 @@ function restartQuiz() {
     fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8');
   }
   totalsMap = new Map();
+  registeredUsers = [];
 }
 
 function groupBy(list, keyGetter) {
@@ -139,6 +163,7 @@ const expressServer = (app = null, isDev = false) => {
   );
 
   app.get('/questions/next', (req, res) => {
+
       if (currentQuestion.question !== '') {
         questionResults.push(currentQuestion);
       }
@@ -159,22 +184,58 @@ const expressServer = (app = null, isDev = false) => {
 
   app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
-
     if (req.body.Body.toUpperCase() === 'A' || req.body.Body.toUpperCase() === 'B' || req.body.Body.toUpperCase() === 'C' || req.body.Body.toUpperCase() === 'D') {
       currentQuestion.processAnswer(req.body.From, req.body.Body);
       twiml.message('We have received your Answer, From FIAQC!!!');
     } else {
-      if (req.body.Body === 'Hello' || req.body.Body === 'hello') {
-        twiml.message('Hi, From FIAQC!');
-      } else if (req.body.Body === 'bye' || req.body.Body === 'Bye') {
-        twiml.message('Good-bye, From FIAQC');
-      } else {
-        twiml.message('We have received your Answer, From FIAQC!!!');
-      }
+      var userData = req.body.Body;
+      var phoneNumber = req.body.From;
+      if(userData.toUpperCase().includes("NAME") ){
+          var userDetails = userData.split(";");
+          var name = userDetails[0].split(":")[1];
+          var city = userDetails[1].split(":")[1];
+          var state = userDetails[2].split(":")[1];
+          registeredUsers.push(new UserInfo(phoneNumber, name, city.toUpperCase(), state.toUpperCase()));
+          twiml.message('We have received your registration information, From FIAQC!!!');
+        }
     }
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
   });
+
+  app.get('/cities', (req,res) => {
+      citiesWithCount = [];
+      const cities = registeredUsers.map(cnt => cnt.city);
+      const uniqueCities = cities.unique();
+      uniqueCities.forEach(function(city) {
+        var citycount = cities.filter(equal_func(city)).length;
+        citiesWithCount.push(new CityWithCount(city, citycount));
+      });
+      res.send(citiesWithCount);
+    });
+
+    app.get('/states', (req,res) => {
+        statesWithCount = [];
+        const states = registeredUsers.map(cnt => cnt.state);
+        const uniqueStates = states.unique();
+        uniqueStates.forEach(function(state) {
+          var stateCount = states.filter(equal_func(state)).length;
+          statesWithCount.push(new StateWithCount(state, stateCount));
+        });
+        res.send(statesWithCount);
+      });
+
+    Array.prototype.unique = function() {
+      return this.filter(function (value, index, self) {
+        return self.indexOf(value) === index;
+      });
+    };
+
+    function equal_func(x) {
+      return function(it) {
+        return it === x;
+      }
+  }
 
   app.get('/restartQuiz', (req, res) => {
       restartQuiz();
