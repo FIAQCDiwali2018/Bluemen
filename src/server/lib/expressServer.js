@@ -22,6 +22,15 @@ class UserAnswer {
   }
 }
 
+class UserInfo{
+  constructor(phoneNumber, name, city, state){
+    this.phoneNumber = phoneNumber;
+    this.name= name;
+    this.city= city;
+    this.state = state;
+  }
+}
+
 class Question {
   constructor(question, answer, options) {
     this.question = question;
@@ -64,6 +73,7 @@ function restartQuiz() {
   questions = questionsDb.slice(0);
   currentQuestion = getNextQuestion();
   results = [];
+  registeredUsers = [];
 }
 
 // $FlowIgnore
@@ -114,18 +124,20 @@ const expressServer = (app = null, isDev = false) => {
 
   app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
-
     if (req.body.Body.toUpperCase() === 'A' || req.body.Body.toUpperCase() === 'B' || req.body.Body.toUpperCase() === 'C' || req.body.Body.toUpperCase() === 'D') {
       currentQuestion.processAnswer(req.body.From, req.body.Body);
       twiml.message('We have received your Answer, From FIAQC!!!');
     } else {
-      if (req.body.Body === 'Hello' || req.body.Body === 'hello') {
-        twiml.message('Hi, From FIAQC!');
-      } else if (req.body.Body === 'bye' || req.body.Body === 'Bye') {
-        twiml.message('Good-bye, From FIAQC');
-      } else {
-        twiml.message('We have received your Answer, From FIAQC!!!');
-      }
+      var userData = req.body.Body;
+      var phoneNumber = req.body.From;
+      if(userData.toUpperCase().includes("NAME") ){
+          var userDetails = userData.split(";");
+          var name = userDetails[0].split(":")[1];
+          var city = userDetails[1].split(":")[1];
+          var state = userDetails[2].split(":")[1];
+          registeredUsers.push(new UserInfo(phoneNumber, name, city, state));
+          twiml.message('We have received your registration information, From FIAQC!!!');
+        }
     }
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
