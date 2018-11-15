@@ -31,6 +31,13 @@ class UserInfo{
   }
 }
 
+class CityWithCount{
+  constructor(city, count){
+    this.city=city;
+    this.count=count;
+  }
+}
+
 class Question {
   constructor(question, answer, options) {
     this.question = question;
@@ -135,13 +142,36 @@ const expressServer = (app = null, isDev = false) => {
           var name = userDetails[0].split(":")[1];
           var city = userDetails[1].split(":")[1];
           var state = userDetails[2].split(":")[1];
-          registeredUsers.push(new UserInfo(phoneNumber, name, city, state));
+          registeredUsers.push(new UserInfo(phoneNumber, name, city.toUpperCase(), state.toUpperCase()));
           twiml.message('We have received your registration information, From FIAQC!!!');
         }
     }
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
   });
+
+  app.get('/cities', (req,res) => {
+      citiesWithCount = [];
+      const cities = registeredUsers.map(cnt => cnt.city);
+      const uniqueCities = cities.unique();
+      cities.forEach(function(city) {
+        var citycount = uniqueCities.filter(equal_func(city)).length;
+        citiesWithCount.push(new CityWithCount(city, citycount));
+      });
+      res.send(citiesWithCount);
+    });
+
+    Array.prototype.unique = function() {
+      return this.filter(function (value, index, self) {
+        return self.indexOf(value) === index;
+      });
+    };
+
+    function equal_func(x) {
+      return function(it) {
+        return it === x;
+      }
+  }
 
   app.get('/restartQuiz', (req, res) => {
       restartQuiz();
