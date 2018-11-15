@@ -38,6 +38,13 @@ class CityWithCount{
   }
 }
 
+class StateWithCount{
+  constructor(state, count){
+    this.state=state;
+    this.count=count;
+  }
+}
+
 class Question {
   constructor(question, answer, options) {
     this.question = question;
@@ -154,12 +161,23 @@ const expressServer = (app = null, isDev = false) => {
       citiesWithCount = [];
       const cities = registeredUsers.map(cnt => cnt.city);
       const uniqueCities = cities.unique();
-      cities.forEach(function(city) {
-        var citycount = uniqueCities.filter(equal_func(city)).length;
+      uniqueCities.forEach(function(city) {
+        var citycount = cities.filter(equal_func(city)).length;
         citiesWithCount.push(new CityWithCount(city, citycount));
       });
       res.send(citiesWithCount);
     });
+
+    app.get('/states', (req,res) => {
+        statesWithCount = [];
+        const states = registeredUsers.map(cnt => cnt.state);
+        const uniqueStates = states.unique();
+        uniqueStates.forEach(function(state) {
+          var stateCount = states.filter(equal_func(state)).length;
+          statesWithCount.push(new StateWithCount(state, stateCount));
+        });
+        res.send(statesWithCount);
+      });
 
     Array.prototype.unique = function() {
       return this.filter(function (value, index, self) {
