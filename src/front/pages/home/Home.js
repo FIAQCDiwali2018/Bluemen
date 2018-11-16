@@ -3,16 +3,10 @@
 // #region imports
 import React, {PureComponent} from 'react';
 import {Link, type Location, type Match, NavLink, type RouterHistory} from 'react-router-dom';
-import Jumbotron from 'reactstrap/lib/Jumbotron';
-import HomeInfo from './styled/HomeInfo';
-import MainTitle from './styled/MainTitle';
-import LightNote from './styled/LightNote';
-import SplitPane from 'react-split-pane';
 import styled from 'styled-components';
 import {Col, Grid, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
-import QuizComponent from "../quiz/QuizComponent";
-import Result from "../../components/Result";
+import BlueMenQuiz from '../quiz/BlueMenQuiz';
 // #endregion
 
 // #region flow types
@@ -126,10 +120,7 @@ class Home extends PureComponent<Props, State> {
                   &nbsp;
                 </Row>
                 <Row>
-                  <QuizComponent/>
-                </Row>
-                <Row>
-                  <Result/>
+                  <BlueMenQuiz/>
                 </Row>
               </Col>
               <Col xs={12} md={4}>
@@ -140,7 +131,7 @@ class Home extends PureComponent<Props, State> {
                 </Row>
                 <Row className="show-grid">
                   <Col xs={12} md={12}>
-                    <WordCloud/>
+                    &nbsp;
                   </Col>
                 </Row>
               </Col>

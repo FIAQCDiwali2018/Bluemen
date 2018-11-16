@@ -2,12 +2,7 @@
 
 // #region imports
 import axios from 'axios';
-import {
-  getMethod,
-  jsonHeader,
-  defaultOptions,
-  getLocationOrigin,
-} from './fetchTools';
+import {defaultOptions, getLocationOrigin, getMethod, jsonHeader} from './fetchTools';
 // #endregion
 
 export const getSomething = (
@@ -28,4 +23,13 @@ export const getSomething = (
     })
     .then(data => data)
     .catch(error => Promise.reject(error));
+};
+
+export const callApi = async (api) => {
+  const response = await fetch(api);
+  const body = await response.json();
+  if (response.status !== 200) {
+    throw Error(body.message);
+  }
+  return body;
 };
