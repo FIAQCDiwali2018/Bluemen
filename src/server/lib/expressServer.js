@@ -66,7 +66,6 @@ class Question {
     }
 
     if (answer.toUpperCase() === this.answer.toUpperCase()) {
-      console.log("Correct!");
       const timeTaken = Date.now() - this.timestamp;
       totalsMap.get(phoneNumber).set(this.guid, new UserAnswer(phoneNumber, timeTaken,name));
 
@@ -113,23 +112,6 @@ function restartQuiz() {
   }
   totalsMap = new Map();
   registeredUsers = prevRegisteredUsers;
-
-  currentQuestion.processAnswer(1234, "A");
-  sleep(2);
-  currentQuestion.processAnswer(12345, "A");
-  currentQuestion = getNextQuestion();
-
-  currentQuestion.processAnswer(12345, "A");
-  sleep(2);
-  currentQuestion.processAnswer(1234, "A");
-
-}
-
-function msleep(n) {
-  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
-}
-function sleep(n) {
-  msleep(n*1000);
 }
 
 function groupBy(list, keyGetter) {
@@ -156,7 +138,6 @@ function getOverallTop10() {
 
 
   const accTotalsSorted = groupBy(accTotals.sort((a, b) => b.count - a.count), ua => ua.count).flatMap(uaGroup => uaGroup[1].sort((a, b) => a.timeTaken - b.timeTaken));
-  console.log(accTotalsSorted);
   return accTotalsSorted.slice(0, 10);
 }
 
