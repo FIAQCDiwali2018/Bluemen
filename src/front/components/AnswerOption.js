@@ -4,7 +4,7 @@ import {Well} from 'react-bootstrap';
 
 function AnswerOption(props) {
   return (
-    <Well bsSize="small">{`${props.label}: ${props.answerContent}`}</Well>
+    <Well bsSize="lg">{`${props.label}: ${props.answerContent}`}</Well>
   );
 }
 
