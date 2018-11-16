@@ -133,8 +133,9 @@ function getOverallTop10() {
   const accTotals = totalsArray.flatMap(total => Array.from(total[1].values()).reduce((accUa, ua) => {
     accUa.timeTaken = accUa.timeTaken + ua.timeTaken;
     accUa.count = accUa.count + 1;
+    accUa.name = ua.name;
     return accUa;
-  }, new UserAnswer(total[0], 0, 0)));
+  }, new UserAnswer(total[0], 0, "")));
 
 
   const accTotalsSorted = groupBy(accTotals.sort((a, b) => b.count - a.count), ua => ua.count).flatMap(uaGroup => uaGroup[1].sort((a, b) => a.timeTaken - b.timeTaken));
