@@ -210,9 +210,9 @@ const expressServer = (app = null, isDev = false) => {
         var city = userDetails[1];
         var state = "";
         var regUser = registeredUsers.filter(cnt => cnt.phoneNumber == req.body.From );
-        
+
         if (regUser.length < 1){
-          if(city == null || typeOf(city) == undefined){
+          if(city == null || city == undefined){
             city = "UNKNOWN";
           }
           registeredUsers.push(new UserInfo(phoneNumber, name, city.toUpperCase(), state.toUpperCase()));
