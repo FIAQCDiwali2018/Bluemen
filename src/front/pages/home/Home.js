@@ -116,11 +116,14 @@ class Home extends PureComponent<Props, State> {
                     </Header>
                     <div>
                       <ul>
-                        <li>1. Register to 883344 with your name, city, country</li>
-                        <li>2. Right side will be Quiz Questiona with 4 options. Please ans one of the option for the question.</li>
+                        <li>Send SMS to 883344 with your name and city. e.g Rahul Dravid;Banglore</li>
+                        <li>Send SMS to 883344 with correct option(A, B, C or D) for below Question</li>
                       </ul>
                     </div>
                   </Col>
+                </Row>
+                <Row>
+                  &nbsp;
                 </Row>
                 <Row>
                   <QuizComponent/>

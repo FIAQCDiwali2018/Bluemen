@@ -9,6 +9,7 @@ const injectGlobalStyle = () => injectGlobal`
     margin: 0;
     height: 100%;
     -webkit-font-smoothing: antialiased;
+    background: plum;
   }
 
   * {
