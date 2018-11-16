@@ -10,6 +10,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const questionsDb = require('../config/questions.json').questions;
 const uuidv4 = require('uuid/v4');
 const fs = require('fs');
+const prevRegisteredUsers = require('../config/quizRegisteredUsers.json');
 // #endregion
 
 // #region constants
@@ -18,9 +19,10 @@ const DOCS_PATH = '../../../docs/';
 // #endregion
 
 class UserAnswer {
-  constructor(phoneNumber, timeTaken) {
+  constructor(phoneNumber, timeTaken,name) {
     this.phoneNumber = phoneNumber;
     this.timeTaken = timeTaken;
+    this.name = name;
     this.count = 1;
   }
 }
@@ -58,22 +60,22 @@ class Question {
     this.guid = uuidv4();
   }
 
-  processAnswer(phoneNumber, answer) {
+  processAnswer(phoneNumber, answer, name) {
     if (!totalsMap.has(phoneNumber)) {
-      totalsMap.set(phoneNumber, new Map());
+      totalsMap.set(phoneNumber, new Map(), name);
     }
 
     if (answer.toUpperCase() === this.answer.toUpperCase()) {
       const timeTaken = Date.now() - this.timestamp;
-      totalsMap.get(phoneNumber).set(this.guid, new UserAnswer(phoneNumber, timeTaken));
+      totalsMap.get(phoneNumber).set(this.guid, new UserAnswer(phoneNumber, timeTaken,name));
 
       this.top10 = this.top10.sort((a, b) => a.timeTaken - b.timeTaken);
       this.top10 = this.top10.filter(userObj => userObj.phoneNumber !== phoneNumber);
       if (this.top10.length < 10) {
-        this.top10.push(new UserAnswer(phoneNumber, timeTaken));
+        this.top10.push(new UserAnswer(phoneNumber, timeTaken, name));
       } else {
         if (this.top10.last().timeTaken > timeTaken) {
-          this.top10 = this.top10.splice(9, 1, new UserAnswer(phoneNumber, timeTaken));
+          this.top10 = this.top10.splice(9, 1, new UserAnswer(phoneNumber, timeTaken, name));
         }
       }
     } else {
@@ -89,6 +91,7 @@ var questions = null;
 var currentQuestion = null;
 var questionResults = null;
 var totalsMap = null;
+registeredUsers = []
 
 restartQuiz();
 
@@ -104,8 +107,11 @@ function restartQuiz() {
   if(totalsMap && totalsMap.size > 0) {
     fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8');
   }
+  if(registeredUsers.length > 0){
+    fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8');
+  }
   totalsMap = new Map();
-  registeredUsers = [];
+  registeredUsers = prevRegisteredUsers;
 }
 
 function groupBy(list, keyGetter) {
@@ -128,7 +134,7 @@ function getOverallTop10() {
     accUa.timeTaken = accUa.timeTaken + ua.timeTaken;
     accUa.count = accUa.count + 1;
     return accUa;
-  }, new UserAnswer(total[0], 0))));
+  }, new UserAnswer(total[0], 0, 0))));
 
   const accTotalsSorted = groupBy(accTotals.sort((a, b) => b.count - a.count), ua => ua.count).flatMap(uaGroup => uaGroup.sort((a, b) => a.timeTaken - b.timeTaken));
   return accTotalsSorted.slice(0, 10).map(ua => ua.phoneNumber);
@@ -182,14 +188,39 @@ const expressServer = (app = null, isDev = false) => {
     res.send(currentQuestion),
   );
 
+
+
   app.post('/sms', (req, res) => {
     const twiml = new MessagingResponse();
     if (req.body.Body.toUpperCase() === 'A' || req.body.Body.toUpperCase() === 'B' || req.body.Body.toUpperCase() === 'C' || req.body.Body.toUpperCase() === 'D') {
-      currentQuestion.processAnswer(req.body.From, req.body.Body);
+
+      var regUser = registeredUsers.filter(cnt => cnt.phoneNumber == req.body.From );
+      var name = "UNKNOWN";
+      if (regUser.length > 0){
+        name = regUser[0].name
+      }
+      currentQuestion.processAnswer(req.body.From, req.body.Body, name);
       twiml.message('We have received your Answer, From FIAQC!!!');
     } else {
       var userData = req.body.Body;
       var phoneNumber = req.body.From;
+      if(userData.toUpperCase().length > 2 ){
+        var userDetails = userData.split(";");
+        var name = userDetails[0];
+        var city = userDetails[1];
+        var state = "";
+        var regUser = registeredUsers.filter(cnt => cnt.phoneNumber == req.body.From );
+        
+        if (regUser.length < 1){
+          if(city == null || typeOf(city) == undefined){
+            city = "UNKNOWN";
+          }
+          registeredUsers.push(new UserInfo(phoneNumber, name, city.toUpperCase(), state.toUpperCase()));
+        }
+
+        twiml.message('We have received your registration information, From FIAQC!!!');
+      }
+
       if(userData.toUpperCase().includes("NAME") ){
           var userDetails = userData.split(";");
           var name = userDetails[0].split(":")[1];

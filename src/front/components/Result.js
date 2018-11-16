@@ -31,9 +31,11 @@ class Result extends Component {
   render() {
     return (
       <div>
+        Top 10 People who have responsed with correct answer.
+        
         {this.state.top10.map((person, index) => <Well
           key={index}
-          bsSize="small">{`${person.phoneNumber}: ${person.timeTaken / 1000}`}</Well>)}
+          bsSize="small">{`${index+1} ${person.name} ${person.phoneNumber} ${person.timeTaken / 1000}`}</Well>)}
       </div>
     );
   }
