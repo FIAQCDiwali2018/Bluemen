@@ -136,8 +136,6 @@ function getOverallTop10() {
     accUa.name = ua.name;
     return accUa;
   }, new UserAnswer(total[0], 0, "")));
-
-
   const accTotalsSorted = groupBy(accTotals.sort((a, b) => b.count - a.count), ua => ua.count).flatMap(uaGroup => uaGroup[1].sort((a, b) => a.timeTaken - b.timeTaken));
   return accTotalsSorted.slice(0, 10);
 }
