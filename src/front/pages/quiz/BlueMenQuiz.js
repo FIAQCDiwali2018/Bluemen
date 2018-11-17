@@ -77,7 +77,7 @@ class BlueMenQuiz extends Component {
   render() {
     const {result, answer, questionId, answerOptions, question, showAns} = this.state;
     const api = result ? '/endQuiz' : '/questions/current';
-    const top10Heading = result ? 'Blue Men Top 10 fasted finger:' : 'Current fasted finger are as follows:';
+    const top10Heading = result ? 'Overall top 10 fastest responses are:' : 'Current fastest respones are:';
     return (
       <div className="QuizApp">
         <Grid>

@@ -113,7 +113,7 @@ class Home extends PureComponent<Props, State> {
               <Row>
                 <Col>
                   <Header className="font-weight-bold textColor">
-                    <H1>Blue Men Quiz</H1>
+                    <H1>The Fun Quiz</H1>
                   </Header>
                   <div>
                     <ul style={{fontSize: 'x-large'}} className="textColor">
