@@ -83,6 +83,7 @@ class BlueMenQuiz extends Component {
             {!result ?
               (<div>
                 <Button onClick={this.setNextQuestion}>NEXT</Button>
+                &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
                 <Button onClick={this.setEndQuiz}>END</Button>
               </div>)
               : <Button onClick={this.restart}>Thank you</Button>}

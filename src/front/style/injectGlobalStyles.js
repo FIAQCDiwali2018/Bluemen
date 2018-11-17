@@ -24,6 +24,7 @@ const injectGlobalStyle = () => injectGlobal`
 
   .question {
     color: blue;
+    width: 554px;
     font-size: 2.2rem;
     padding: 0 0 0 2px;
   }
