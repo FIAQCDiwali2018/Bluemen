@@ -1,20 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Well} from 'react-bootstrap';
-import logo from '../style/Artboard 2.png'
-
-const style = {
-  backgroundImage: `url(${logo})`,
-  backgroundRepeat: 'no-repeat',
-  height: '100px',
-  width: '620px'
-};
+import SplitText from 'react-pose-text';
 
 function AnswerOption(props) {
+  const charPoses = {
+    exit: {opacity: 0, y: 20},
+    enter: {
+      opacity: 1,
+      y: 0,
+      delay: ({charIndex}) => charIndex * 30
+    }
+  };
+
   return (
-    <Well bsSize="lg">
-      <div className="answer" style={style}>{`${props.label}: ${props.answerContent}`}</div>
-    </Well>
+    <div className="containerText">
+      <SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+        {`${props.label}: ${props.answerContent}`}
+      </SplitText>
+    </div>
   );
 }
 

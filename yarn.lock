@@ -723,6 +723,29 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@emotion/is-prop-valid@^0.6.5":
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.6.8.tgz#68ad02831da41213a2089d2cab4e8ac8b30cbd85"
+  dependencies:
+    "@emotion/memoize" "^0.6.6"
+
+"@emotion/memoize@^0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.6.6.tgz#004b98298d04c7ca3b4f50ca2035d4f60d2eed1b"
+
+"@popmotion/easing@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.1.tgz#48336aea29542113df10aeb81b4fd10f0b95f937"
+
+"@popmotion/popcorn@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@popmotion/popcorn/-/popcorn-0.2.0.tgz#02750f55c27febd7b3009cc8ce29392735d235d0"
+  dependencies:
+    "@popmotion/easing" "^1.0.1"
+    framesync "^4.0.1"
+    hey-listen "^1.0.5"
+    style-value-types "^3.0.7"
+
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
@@ -833,6 +856,10 @@
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-4.7.2.tgz#0e670ea254d559241b6eeb3894f8754991e73220"
 
+"@types/invariant@^2.2.29":
+  version "2.2.29"
+  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.29.tgz#aa845204cd0a289f65d47e0de63a6a815e30cc66"
+
 "@types/jest@^23.3.1":
   version "23.3.9"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.9.tgz#c16b55186ee73ae65e001fbee69d392c51337ad1"
@@ -856,6 +883,10 @@
 "@types/node@*":
   version "10.12.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.5.tgz#7e7ea1a9b34d2c8d704cb0b755dffbcda34741ad"
+
+"@types/node@^10.0.5":
+  version "10.12.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.9.tgz#a07bfa74331471e1dc22a47eb72026843f7b95c8"
 
 "@types/prop-types@*":
   version "15.5.6"
@@ -4044,6 +4075,12 @@ frameguard@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/frameguard/-/frameguard-3.0.0.tgz#7bcad469ee7b96e91d12ceb3959c78235a9272e9"
 
+framesync@^4.0.0, framesync@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/framesync/-/framesync-4.0.1.tgz#ed7791baf0d266f58ab02000456f82cb384815bf"
+  dependencies:
+    hey-listen "^1.0.5"
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -4398,6 +4435,10 @@ helmet@^3.13.0:
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
+
+hey-listen@^1.0.4, hey-listen@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/hey-listen/-/hey-listen-1.0.5.tgz#6d0a3a2f60177f65bc4404d571a00025bf5dc20e"
 
 hide-powered-by@1.0.0:
   version "1.0.0"
@@ -7061,6 +7102,29 @@ pop-iterate@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/pop-iterate/-/pop-iterate-1.0.1.tgz#ceacfdab4abf353d7a0f2aaa2c1fc7b3f9413ba3"
 
+popmotion-pose@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/popmotion-pose/-/popmotion-pose-3.4.0.tgz#6f9f60f3683b77c2d54d7588f64f9c1ec1faf6a9"
+  dependencies:
+    "@popmotion/easing" "^1.0.1"
+    hey-listen "^1.0.5"
+    popmotion "^8.5.0"
+    pose-core "^2.0.0"
+    style-value-types "^3.0.6"
+    tslib "^1.9.1"
+
+popmotion@^8.5.0, popmotion@^8.5.2:
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/popmotion/-/popmotion-8.5.2.tgz#5c271fc4370f2739970c3a04bc890b7dbc8e519e"
+  dependencies:
+    "@popmotion/easing" "^1.0.1"
+    "@popmotion/popcorn" "^0.2.0"
+    framesync "^4.0.0"
+    hey-listen "^1.0.5"
+    style-value-types "^3.0.6"
+    stylefire "^2.0.7"
+    tslib "^1.9.1"
+
 popper.js@1.14.3:
   version "1.14.3"
   resolved "http://registry.npmjs.org/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
@@ -7076,6 +7140,15 @@ portfinder@^1.0.9:
     async "^1.5.2"
     debug "^2.2.0"
     mkdirp "0.5.x"
+
+pose-core@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/pose-core/-/pose-core-2.0.0.tgz#1a1497a18a25ed2556d92dd728e909e96df6d67e"
+  dependencies:
+    "@types/invariant" "^2.2.29"
+    "@types/node" "^10.0.5"
+    hey-listen "^1.0.5"
+    tslib "^1.9.1"
 
 posix-character-classes@^0.1.0:
   version "0.1.1"
@@ -7781,6 +7854,21 @@ react-popper@^0.10.4:
   dependencies:
     popper.js "^1.14.1"
     prop-types "^15.6.1"
+
+react-pose-text@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-pose-text/-/react-pose-text-3.1.0.tgz#625471d503a56773715dc6ad79a5f7ef86f2a0ec"
+  dependencies:
+    hey-listen "^1.0.5"
+
+react-pose@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.2.tgz#0b4ad5e5d58534e426f7287c27916d7114c2ab7c"
+  dependencies:
+    "@emotion/is-prop-valid" "^0.6.5"
+    hey-listen "^1.0.5"
+    popmotion-pose "^3.4.0"
+    tslib "^1.9.1"
 
 react-prop-types@^0.4.0:
   version "0.4.0"
@@ -8969,6 +9057,10 @@ style-loader@^0.22.1:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
+style-value-types@^3.0.6, style-value-types@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/style-value-types/-/style-value-types-3.0.7.tgz#6e7a22cc8b1a4465193268ed66ad5f2a82579054"
+
 styled-components@^3.2.6:
   version "3.4.10"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-3.4.10.tgz#9a654c50ea2b516c36ade57ddcfa296bf85c96e1"
@@ -8982,6 +9074,15 @@ styled-components@^3.2.6:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^3.2.3"
+
+stylefire@^2.0.7:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/stylefire/-/stylefire-2.2.1.tgz#3ae1f74477fa5117d410757cefe5878179708e38"
+  dependencies:
+    framesync "^4.0.0"
+    hey-listen "^1.0.4"
+    style-value-types "^3.0.6"
+    tslib "^1.9.1"
 
 stylehacks@^4.0.0:
   version "4.0.1"
@@ -9227,7 +9328,7 @@ tryer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
 
-tslib@^1.9.0:
+tslib@^1.9.0, tslib@^1.9.1:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 

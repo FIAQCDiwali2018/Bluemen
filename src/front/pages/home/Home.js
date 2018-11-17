@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import {Col, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
 import BlueMenQuiz from '../quiz/BlueMenQuiz';
+import './../../components/css/style.css';
 // #endregion
 
 // #region flow types
@@ -21,7 +22,7 @@ export type Props = {
 const Grid = styled('div')`
   margin: 0px 50px 0px 50px;
   max-width: 100%;
-`
+`;
 
 const Container = styled('div')`
   height: 100%;
