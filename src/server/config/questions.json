@@ -199,7 +199,48 @@
         "D":"IIT-Delhi"
       },
       "answer":"D"
+    },
+    {
+      "question":"In which city of California is Sea World located?",
+      "options":{
+        "A":"San Francisco",
+        "B":"San Diego",
+        "C":"Santa Barbara",
+        "D":"Los Angeles"
+      },
+      "answer":"B"
+    },
+    {
+      "question":"Which of the Great Lakes is the only one to lie entirely in the United States?",
+      "options":{
+        "A":"Lake Huron",
+        "B":"Lake Superior",
+        "C":"Lake Erie",
+        "D":"Lake Michigan"
+      },
+      "answer":"D"
+    },
+	{
+      "question":"In which state does the Snake River originate?",
+      "options":{
+        "A":"Colorado",
+        "B":"Wyoming",
+        "C":"Iowa",
+        "D":"Idaho"
+      },
+      "answer":"B"
+    },
+	{
+      "question":"How many states are there in the United States of America?",
+      "options":{
+        "A":"49",
+        "B":"50",
+        "C":"51",
+        "D":"52"
+      },
+      "answer":"B"
     }
+
 
 
   ]
