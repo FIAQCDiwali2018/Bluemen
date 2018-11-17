@@ -48,3 +48,6 @@
 .item:nth-child(5) {
   background: #c8c8a9;
 }
+.buttonsStyle{
+  padding-top: 20px;  
+}

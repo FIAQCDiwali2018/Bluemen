@@ -70,6 +70,16 @@
       },
       "answer":"C"
     },
+    {
+      "question":"Which team won the IPL (2009)?",
+      "options":{
+        "A":"Deccan Chargers",
+        "B":"Chennai Super Kings",
+        "C":"Mumbai Indians",
+        "D":"Delhi Daredevils"
+      },
+      "answer":"A"
+    },
 	  {
       "question":"Who is the current President of India?",
       "options":{
@@ -151,14 +161,44 @@
       "answer":"A"
     },
     {
-      "question":"Which team won the IPL (2009)?",
+      "question":"Which International star performed in the opening ceremony of 2013 IPL?",
       "options":{
-        "A":"Deccan Chargers",
-        "B":"Chennai Super Kings",
-        "C":"Mumbai Indians",
-        "D":"Delhi Daredevils"
+        "A":"Jennifer Lopez",
+        "B":"Akon",
+        "C":"Pitbull",
+        "D":"None of the Above"
       },
-      "answer":"A"
+      "answer":"C"
+    },
+    {
+      "question":"Which country successfully test-launched its first hypersonic aircraft?",
+      "options":{
+        "A":"India",
+        "B":"China",
+        "C":"Russia",
+        "D":"USA"
+      },
+      "answer":"B"
+    },
+    {
+      "question":"Name the farthest star that was recently seen by NASA’s Hubble Space Telescope?",
+      "options":{
+        "A":"Alpha Orionis",
+        "B":"Proxima Centauri",
+        "C":"Icarus",
+        "D":"Procyon"
+      },
+      "answer":"C"
+    },
+    {
+      "question":"Which IIT institute installed India’s first 5G radio laboratory?",
+      "options":{
+        "A":"IIT-Lucknow",
+        "B":"IIT-Kanpur",
+        "C":"IIT-Roorkee",
+        "D":"IIT-Delhi"
+      },
+      "answer":"D"
     }
 
 

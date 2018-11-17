@@ -44,7 +44,7 @@ class Top10FastestFinger extends Component {
               </Col>
               <Col xs={7} md={7}>
                 <Well
-                  bsSize="small">{person.name} / {person.phoneNumber}</Well>
+                  bsSize="small">{person.name}  {person.phoneNumber}</Well>
               </Col>
               <Col xs={2} md={2}>
                 <Well
