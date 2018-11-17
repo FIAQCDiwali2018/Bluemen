@@ -163,12 +163,6 @@ const expressServer = (app = null, isDev = false) => {
     });
   };
 
-  Array.prototype.flatMap = function () {
-    return this.filter(function (value, index, self) {
-      return self.indexOf(value) === index;
-    });
-  };
-
   app.set('port', config.get('server.port'));
   app.set('ipAdress', config.get('server.host'));
 

@@ -42,7 +42,7 @@ class WordCloud extends PureComponent<Props, State> {
     const {data} = this.state;
     return (
       <WordCloudComponent width={400} height={300} data={data}
-                          fontSizeMapper={word => Math.log2(word.value) * 1000}/>);
+                          fontSizeMapper={word => Math.log2(word.value * 1000) * 5}/>);
   }
 
   // #endregion
