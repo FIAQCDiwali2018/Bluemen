@@ -1,54 +1,156 @@
 {
    "questions":[
-      {
-         "question":"Who is the president of the United States of America",
-         "options":{
-            "A":"George Washington",
-            "B":"Donald Trump",
-            "C":"Barack Obama",
-            "D":"George W. Bush"
-         },
-         "answer":"B"
-      },
+    {
+      "question":"Who co-founded Hotmail in 1996?",
+      "options":{
+          "A":"Shawn Fanning",
+          "B":"Ada Byron Lovelace",
+          "C":"Sabeer Bhatia",
+          "D":"Ray Tomlinson"
+        },
+        "answer":"C"
+    },
 	  {
-         "question":"The first human life to set foot in North America is mostly from...",
-         "options":{
-            "A":"Asia",
-            "B":"Africa",
-            "C":"Australia",
-            "D":"Europe"
-         },
-         "answer":"A"
+      "question":"Who is the husband of Goddess Lakshmi?",
+      "options":{
+        "A":"Lord Shiva",
+        "B":"Lord Vishnu",
+        "C":"Lord Bramha",
+        "D":"Lord Indra"
       },
-	  {
-         "question":"Who was the first president?",
-         "options":{
-            "A":"George Washington",
-            "B":"Donald Trump",
-            "C":"Barack Obama",
-            "D":"George W. Bush"
-         },
-         "answer":"A"
+      "answer":"B"
+    },
+    {
+      "question":"Who killed Narakasura?",
+      "options":{
+        "A":"Lord Naryana",
+        "B":"Lord Shiva",
+        "C":"Lord Krishna",
+        "D":"Lord Rama"
       },
-	  {
-         "question":"Who is the Roman God of Love?",
-         "options":{
-            "A":"Venus",
-            "B":"Cupid",
-            "C":"Hercules",
-            "D":"Perseus"
-         },
-         "answer":"B"
+      "answer":"C"
+    },
+    {
+      "question":"Which oil is traditionally used to lit lamps during Diwali?",
+      "options":{
+        "A":"Olive Oil",
+        "B":"Vegetable Oil",
+        "C":"Corn Oil",
+        "D":"Mustard Oil"
       },
+      "answer":"D"
+    },
+    {
+      "question":"Who was the first president of USA?",
+      "options":{
+        "A":"George Washington",
+        "B":"Donald Trump",
+        "C":"Barack Obama",
+        "D":"George W. Bush"
+      },
+      "answer":"A"
+    },
+    {
+      "question":"The first Thanksgiving lasted for how many days?",
+      "options":{
+        "A":"1 Day",
+        "B":"2 Days",
+        "C":"3 Days",
+        "D":"5 Days"
+      },
+      "answer":"C"
+    },
+    {
+      "question":"How many US states start with letter N?",
+      "options":{
+        "A":"4",
+        "B":"7",
+        "C":"8",
+        "D":"9"
+      },
+      "answer":"C"
+    },
 	  {
-         "question":"Who bombed Pearl Harbor?",
-         "options":{
-            "A":"Chinese",
-            "B":"Greeks",
-            "C":"Germans",
-            "D":"Japanese"
-         },
-         "answer":"A"
-      }
-   ]
+      "question":"Who is the current President of India?",
+      "options":{
+        "A":"Ram Nath Kovind",
+        "B":"Pratibha Patil",
+        "C":"Pranab Mukherjee",
+        "D":"K R Narayanan"
+      },
+      "answer":"A"
+    },
+	  {
+      "question":"'OS' computer abbreviation usually means ?",
+      "options":{
+        "A":"Order of Significance",
+        "B":"Open Software",
+        "C":"Operating System",
+        "D":"Optical Sensor"
+      },
+      "answer":"C"
+    },
+    {
+      "question":"Who is the father of Geometry?",
+      "options":{
+        "A":"Aristotle",
+        "B":"Euclid",
+        "C":"Pythagoras",
+        "D":"Kepler"
+      },
+      "answer":"B"
+    },
+    {
+      "question":"Michael Jackson is a distinguished person in the field of?",
+      "options":{
+        "A":"Pop Music",
+        "B":"Jounalism",
+        "C":"Sports",
+        "D":"Acting"
+      },
+      "answer":"A"
+    },
+    {
+      "question":"Which city is known as 'Electronic City of India'?",
+      "options":{
+        "A":"Mumbai",
+        "B":"Hyderabad",
+        "C":"Guragon",
+        "D":"Bangalore"
+      },
+      "answer":"D"
+    },
+    {
+      "question":"The World Environment Day is celebrated on",
+      "options":{
+        "A":"April 7",
+        "B":"June 5",
+        "C":"August 6",
+        "D":"June 16"
+      },
+      "answer":"B"
+    },
+    {
+      "question":"In which decade was the Internet first implemented?",
+      "options":{
+        "A":"1940s",
+        "B":"1950s",
+        "C":"1960s",
+        "D":"1980s"
+      },
+      "answer":"C"
+    },
+    {
+      "question":"When was John Deere founded?",
+      "options":{
+        "A":"1837",
+        "B":"1833",
+        "C":"1839",
+        "D":"1836"
+      },
+      "answer":"A"
+    }
+
+
+  ]
 }
