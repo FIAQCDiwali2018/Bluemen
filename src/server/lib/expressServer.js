@@ -235,7 +235,6 @@ const expressServer = (app = null, isDev = false) => {
         name = regUser[0].name;
       }
       currentQuestion.processAnswer(req.body.From, req.body.Body, name);
-      //twiml.message('We have received your Answer, From FIAQC!!!');
     } else {
       const userData = req.body.Body;
       const phoneNumber = req.body.From;
