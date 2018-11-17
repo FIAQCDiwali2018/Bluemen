@@ -89,9 +89,9 @@ class BlueMenQuiz extends Component {
               {!result ?
                 (<div className="buttonsStyle">
                   <Button bsSize={'lg'} bsStyle='primary' onClick={this.setNextQuestion}>NEXT</Button>
-                  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                  &nbsp;  &nbsp;  &nbsp;
                   <Button bsSize={'lg'} onClick={this.showAns}>SHOW ANSWER</Button>
-                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END QUIZ</Button>
+                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END</Button>
                 </div>)
                 : <Button bsSize={'lg'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
             </Col>
