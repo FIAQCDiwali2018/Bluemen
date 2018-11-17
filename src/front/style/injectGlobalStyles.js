@@ -9,11 +9,17 @@ const injectGlobalStyle = () => injectGlobal`
     margin: 0;
     height: 100%;
     -webkit-font-smoothing: antialiased;
-    background: plum;
+    background: white;
   }
 
   * {
     box-sizing: border-box;
+  }
+
+  .answer {
+    color: white;
+    font-size: 2.3rem;
+    padding: 13px 0 0 30px;
   }
 
   a {
