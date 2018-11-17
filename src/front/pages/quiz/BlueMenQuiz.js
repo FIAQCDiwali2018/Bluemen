@@ -30,6 +30,12 @@ class BlueMenQuiz extends Component {
       .catch(err => console.log(err));
   };
 
+  restart = () => {
+    this.setState({result: false});
+    this.UNSAFE_componentWillMount();
+    this.forceUpdate();
+  };
+
   constructor(props) {
     super(props);
 
@@ -39,16 +45,16 @@ class BlueMenQuiz extends Component {
       question: '',
       answerOptions: {A: '', B: '', C: '', D: ''},
       answer: '',
-      result: false,
+      result: false
     };
-
-    this.setNextQuestion = this.setNextQuestion.bind(this);
   }
 
   componentDidMount() {
-    callApi('/questions/current')
-      .then(res => this.updateState(res))
-      .catch(err => console.log(err));
+    if (!this.state.result) {
+      callApi('/questions/current')
+        .then(res => this.updateState(res))
+        .catch(err => console.log(err));
+    }
   }
 
   UNSAFE_componentWillMount() {
@@ -63,11 +69,15 @@ class BlueMenQuiz extends Component {
     const top10Heading = result ? 'Blue Men Top 10 fasted figure:' : 'Current fasted figure are as follows:';
     return (
       <div className="QuizApp">
-        {questionId > 0 || result ?
+        {questionId > 0 && !result ?
           <Quiz answer={answer} answerOptions={answerOptions} questionId={questionId} question={question}/> : ''}
-        <Button disabled={result} onClick={this.setNextQuestion}>NEXT</Button>
-        <Button onClick={this.setEndQuiz}>END</Button>
-        <Top10FastestFinger next={this.setNextQuestion} api={api} heading={top10Heading}/>
+        {!result ?
+          (<div>
+            <Button onClick={this.setNextQuestion}>NEXT</Button>
+            <Button onClick={this.setEndQuiz}>END</Button>
+          </div>)
+          : <Button onClick={this.restart}>Thank you</Button>}
+        <Top10FastestFinger next={this.setNextQuestion} api={api} result={result} heading={top10Heading}/>
       </div>
     );
   }

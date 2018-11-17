@@ -100,54 +100,54 @@ class Home extends PureComponent<Props, State> {
     const {sections} = this.props;
     return (
       <div>
-          <Grid>
-            <Row>
-              <Col xs={12} md={8}>
-                <Row>
-                  <Col>
-                    <Header>
-                      <H1>Blue Men Quiz</H1>
-                    </Header>
-                    <div>
-                      <ul>
-                        <li>Send SMS to 883344 with your name and city. e.g Rahul Dravid;Banglore</li>
-                        <li>Send SMS to 883344 with correct option(A, B, C or D) for below Question</li>
-                      </ul>
-                    </div>
-                  </Col>
-                </Row>
-                <Row>
+        <Grid>
+          <Row>
+            <Col xs={12} md={8}>
+              <Row>
+                <Col>
+                  <Header>
+                    <H1>Blue Men Quiz</H1>
+                  </Header>
+                  <div>
+                    <ul>
+                      <li>Send SMS to 883344 with your name and city. e.g Rahul Dravid;Banglore</li>
+                      <li>Send SMS to 883344 with correct option(A, B, C or D) for below Question</li>
+                    </ul>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                &nbsp;
+              </Row>
+              <Row>
+                <BlueMenQuiz/>
+              </Row>
+            </Col>
+            <Col xs={12} md={4}>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
+                  <WordCloud/>
+                </Col>
+              </Row>
+              <Row className="show-grid">
+                <Col xs={12} md={12}>
                   &nbsp;
-                </Row>
-                <Row>
-                  <BlueMenQuiz/>
-                </Row>
-              </Col>
-              <Col xs={12} md={4}>
-                <Row className="show-grid">
-                  <Col xs={12} md={12}>
-                    <WordCloud/>
-                  </Col>
-                </Row>
-                <Row className="show-grid">
-                  <Col xs={12} md={12}>
-                    &nbsp;
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Grid>
-          {/*{sections.map(section => (*/}
-            {/*<React.Fragment>*/}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+        {/*{sections.map(section => (*/}
+        {/*<React.Fragment>*/}
 
-              {/*<SectionTitle>{section.title}</SectionTitle>*/}
-              {/*{section.items.map(item => (*/}
-                {/*<SectionItem to={item.url} activeStyle={{color: '#cb659c'}}>*/}
-                  {/*{item.title}*/}
-                {/*</SectionItem>*/}
-              {/*))}*/}
-            {/*</React.Fragment>*/}
-          {/*))}*/}
+        {/*<SectionTitle>{section.title}</SectionTitle>*/}
+        {/*{section.items.map(item => (*/}
+        {/*<SectionItem to={item.url} activeStyle={{color: '#cb659c'}}>*/}
+        {/*{item.title}*/}
+        {/*</SectionItem>*/}
+        {/*))}*/}
+        {/*</React.Fragment>*/}
+        {/*))}*/}
       </div>
     );
   }

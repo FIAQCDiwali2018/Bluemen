@@ -3,6 +3,7 @@
 // #region imports
 import React, {PureComponent} from 'react';
 import * as WordCloudComponent from 'react-d3-cloud';
+import {callApi} from '../../services/API/example';
 // #endregion
 
 // #region flow types
@@ -14,14 +15,6 @@ export type State = any;
 // #endregion
 
 class WordCloud extends PureComponent<Props, State> {
-  callApi = async (api) => {
-    const response = await fetch(api);
-    const body = await response.json();
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
 
   constructor(props) {
     super(props);
@@ -30,11 +23,11 @@ class WordCloud extends PureComponent<Props, State> {
 
   componentDidMount() {
     setInterval(() => {
-      this.callApi('/cities')
+      callApi('/cities')
         .then(resp => this.setState({data: resp}))
         .catch(err => console.log(err));
       this.forceUpdate();
-    }, 3000);
+    }, 1000);
   }
 
   // #region lifecycle

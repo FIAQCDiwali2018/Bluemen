@@ -12,16 +12,19 @@ class Top10FastestFinger extends Component {
   }
 
   componentDidMount() {
+    const {api, result, next} = this.props;
     setInterval(() => {
-      callApi(this.props.api)
-        .then(resp => {
-          if (resp.top10.length > 10) {
-            this.props.next();
-          } else {
-            this.setState({top10: resp.top10});
-          }
-        })
-        .catch(err => console.log(err));
+      if (!result) {
+        callApi(api)
+          .then(resp => {
+            if (resp.top10.length > 10) {
+              next();
+            } else {
+              this.setState({top10: resp.top10});
+            }
+          })
+          .catch(err => console.log(err));
+      }
       this.forceUpdate();
     }, 1000);
   }
@@ -33,7 +36,7 @@ class Top10FastestFinger extends Component {
       <div>
         <Well bsSize="lg">{heading}</Well>
         <Grid>
-          {top10.slice(0, 10).map((person, index) => (
+          {top10.slice(0, 10).filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
             <Row key={person.name + 'person' + index}>
               <Col xs={12} md={3}>
                 <Well
@@ -64,6 +67,7 @@ Top10FastestFinger.propTypes = {
   next: PropTypes.func.isRequired,
   api: PropTypes.string.isRequired,
   heading: PropTypes.string.isRequired,
+  result: PropTypes.bool.isRequired
 };
 
 
