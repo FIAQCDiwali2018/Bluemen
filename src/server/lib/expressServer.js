@@ -99,10 +99,21 @@ function restartQuiz() {
   currentQuestion = getNextQuestion();
   questionResults = [];
   if (totalsMap && totalsMap.size > 0) {
-    fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8');
+    fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8', function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+    });
   }
   if (registeredUsers.length > 0) {
-    fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8');
+    fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+    if (err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+    });
   }
   totalsMap = new Map();
   registeredUsers = prevRegisteredUsers;
@@ -231,6 +242,14 @@ const expressServer = (app = null, isDev = false) => {
             city = 'UNKNOWN';
           }
           registeredUsers.push(new UserInfo(phoneNumber, name, city.trim().toUpperCase(), state.trim().toUpperCase()));
+          if (registeredUsers.length > 0) {
+            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("The file was saved!");
+            });
+          }
         }
 
         twiml.message('We have received your registration information, From FIAQC!!!');

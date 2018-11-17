@@ -34,7 +34,7 @@ class Top10FastestFinger extends Component {
     const {heading} = this.props;
     return (
       <div>
-        <Well bsSize="lg">{heading}</Well>
+        <span style={{fontSize: 'larger'}}><b>{heading}</b></span>
         <Grid>
           {top10.slice(0, 10).filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
             <Row key={person.name + 'person' + index}>

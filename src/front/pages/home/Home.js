@@ -114,9 +114,9 @@ class Home extends PureComponent<Props, State> {
                     <H1>Blue Men Quiz</H1>
                   </Header>
                   <div>
-                    <ul>
-                      <li>Send SMS to 883344 with your name and city. e.g Rahul Dravid;Banglore</li>
-                      <li>Send SMS to 883344 with correct option(A, B, C or D) for below Question</li>
+                    <ul style = {{fontSize: 'large'}}>
+                      <li><span style={{fontSize: 'larger'}}>TEXT to <b>(667) 771-2333</b></span> with your name and city. e.g Rahul Dravid;Banglore</li>
+                      <li><span style={{fontSize: 'larger'}}><b>TEXT A or B or C or D</b></span> to answer quiz questions to the same number as mentioned above</li>
                     </ul>
                   </div>
                 </Col>

@@ -149,6 +149,16 @@
         "D":"1836"
       },
       "answer":"A"
+    },
+    {
+      "question":"Which team won the IPL (2009)?",
+      "options":{
+        "A":"Deccan Chargers",
+        "B":"Chennai Super Kings",
+        "C":"Mumbai Indians",
+        "D":"Delhi Daredevils"
+      },
+      "answer":"A"
     }
 
 
