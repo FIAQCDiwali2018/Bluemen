@@ -99,7 +99,7 @@ function restartQuiz() {
   currentQuestion = getNextQuestion();
   questionResults = [];
   if (totalsMap && totalsMap.size > 0) {
-    fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8', function (err) {
+    fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8', function(err) {
       if (err) {
         return console.log(err);
       }
@@ -108,7 +108,7 @@ function restartQuiz() {
     });
   }
   if (registeredUsers.length > 0) {
-    fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+    fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function(err) {
       if (err) {
         return console.log(err);
       }
@@ -169,11 +169,11 @@ const expressServer = (app = null, isDev = false) => {
     res.send(textCountObjects);
   };
 
-  const cityFn = cnt => cnt.city === 'UNKNOWN' ? '' : cnt.city.trim();
+  const cityFn = cnt => cnt.city === 'UNKNOWN' ? '' : cnt.city.toUpperCase().trim();
   const stateFn = cnt => cnt.state.trim();
   const equal_func = (x) => (it) => it === x;
-  Array.prototype.unique = function () {
-    return this.filter(function (value, index, self) {
+  Array.prototype.unique = function() {
+    return this.filter(function(value, index, self) {
       return value.trim() !== '' && self.indexOf(value.trim()) === index;
     });
   };
@@ -215,6 +215,7 @@ const expressServer = (app = null, isDev = false) => {
       } else {
         currentQuestion = new Question('', '', '');
       }
+
 
       res.send(currentQuestion);
     },
@@ -259,7 +260,7 @@ const expressServer = (app = null, isDev = false) => {
           }
           registeredUsers.push(new UserInfo(phoneNumber, name, city.trim().toUpperCase(), state.trim().toUpperCase()));
           if (registeredUsers.length > 0) {
-            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function(err) {
               if (err) {
                 return console.log(err);
               }
@@ -274,7 +275,7 @@ const expressServer = (app = null, isDev = false) => {
           }
 
           if (registeredUsers.length > 0) {
-            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function(err) {
               if (err) {
                 return console.log(err);
               }

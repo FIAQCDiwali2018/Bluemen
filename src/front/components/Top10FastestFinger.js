@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {Col, Grid, Row, Well} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import {callApi} from '../services/API/example';
+import {PoseGroup} from 'react-pose';
+import {Child, Parent} from './../components/Quiz';
+import {charPoses} from './../components/AnswerOption';
+import SplitText from 'react-pose-text';
 
 class Top10FastestFinger extends Component {
   constructor(props) {
@@ -34,25 +38,34 @@ class Top10FastestFinger extends Component {
     const {heading} = this.props;
     return (
       <div>
-        <span style={{fontSize: 'larger'}}><b>{heading}</b></span>
-        <Grid>
-          {top10.slice(0, 10).filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
-            <Row key={person.name + 'person' + index}>
-              <Col xs={1} md={1}>
-                <Well
-                  bsSize="small">{index + 1}</Well>
-              </Col>
-              <Col xs={7} md={7}>
-                <Well
-                  bsSize="small">{person.name}  {person.phoneNumber}</Well>
-              </Col>
-              <Col xs={2} md={2}>
-                <Well
-                  bsSize="small">{(person.timeTaken / 1000).toFixed(2)}</Well>
-              </Col>
-            </Row>
-          ))}
-        </Grid>
+        <PoseGroup preEnterPose="preEnter">
+          <Parent pose="open" key={'stats1'} className="totalSldebarTop10">
+            <h6 className="questionTop10">{heading}</h6>
+            <PoseGroup preEnterPose="preEnter">
+              {top10.slice(0, 6).filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
+                <Child className="item" key={`aUserRegisteredFastest${index}`}>
+                  <Row key={person.name + 'person' + index}>
+                    <Col xs={1} md={1} key={`Col1-${index}`}>
+                      <SplitText className="containerTextTop10" initialPose="exit" pose="enter" charPoses={charPoses}>
+                        {(index + 1 )+''}
+                      </SplitText>
+                    </Col>
+                    <Col xs={7} md={7} key={`Col2-${index}`}>
+                      <SplitText className="containerTextTop10" initialPose="exit" pose="enter" charPoses={charPoses}>
+                        {`${person.name} ${person.phoneNumber}`}
+                      </SplitText>
+                    </Col>
+                    <Col xs={3} md={3} key={`Col3-${index}`}>
+                      <SplitText className="containerTextTop10" initialPose="exit" pose="enter" charPoses={charPoses}>
+                        {(person.timeTaken / 1000).toFixed(2) + ''}
+                      </SplitText>
+                    </Col>
+                  </Row>
+                </Child>
+              ))}
+            </PoseGroup>
+          </Parent>
+        </PoseGroup>
       </div>
     );
   }
@@ -63,7 +76,7 @@ Top10FastestFinger.propTypes = {
   next: PropTypes.func.isRequired,
   api: PropTypes.string.isRequired,
   heading: PropTypes.string.isRequired,
-  result: PropTypes.bool.isRequired
+  result: PropTypes.bool.isRequired,
 };
 
 
