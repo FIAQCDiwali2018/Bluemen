@@ -100,19 +100,19 @@ function restartQuiz() {
   questionResults = [];
   if (totalsMap && totalsMap.size > 0) {
     fs.writeFile('./results_' + Date.now() + '.json', JSON.stringify(totalsMap), 'utf-8', function (err) {
-    if (err) {
+      if (err) {
         return console.log(err);
-    }
+      }
 
-    console.log("The file was saved!");
+      console.log('The file was saved!');
     });
   }
   if (registeredUsers.length > 0) {
     fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
-    if (err) {
+      if (err) {
         return console.log(err);
-    }
-    console.log("The file was saved!");
+      }
+      console.log('The file was saved!');
     });
   }
   totalsMap = new Map();
@@ -134,7 +134,7 @@ function groupBy(list, keyGetter) {
 }
 
 function getOverallTop10() {
-  if (undefined !== totalsMap && null !== totalsMap && totalsMap.size > 0) {
+  if (undefined !== totalsMap && totalsMap !== null && totalsMap.size > 0) {
     const totalsArray = Array.from(totalsMap);
     const accTotals = flatMap(totalsArray, total => Array.from(total[1].values()).reduce((accUa, ua) => {
       accUa.timeTaken = accUa.timeTaken + ua.timeTaken;
@@ -165,12 +165,12 @@ const expressServer = (app = null, isDev = false) => {
     res.send(textCountObjects);
   };
 
-  const cityFn = cnt => cnt.city.trim();
+  const cityFn = cnt => cnt.city === 'UNKNOWN' ? '' : cnt.city.trim();
   const stateFn = cnt => cnt.state.trim();
   const equal_func = (x) => (it) => it === x;
   Array.prototype.unique = function () {
     return this.filter(function (value, index, self) {
-      return self.indexOf(value.trim()) === index;
+      return value.trim() !== '' && self.indexOf(value.trim()) === index;
     });
   };
 
@@ -231,9 +231,18 @@ const expressServer = (app = null, isDev = false) => {
       const userData = req.body.Body;
       const phoneNumber = req.body.From;
       if (userData.toUpperCase().length > 2) {
-        const userDetails = userData.split(',');
-        const name = userDetails[0];
-        let city = userDetails[1];
+        let userDetails = userData.split(';');
+
+        if (userDetails.length !== 2) {
+          userDetails = userData.split(',');
+        }
+
+        if (userDetails.length !== 2) {
+          userDetails = userData.split(':');
+        }
+
+        const name = userDetails[0].trim();
+        let city = userDetails[1] ? userDetails[1].trim() : 'UNKNOWN';
         const state = '';
         const regUser = registeredUsers.filter(cnt => cnt.phoneNumber === req.body.From);
         if (regUser.length < 1) {
@@ -243,10 +252,25 @@ const expressServer = (app = null, isDev = false) => {
           registeredUsers.push(new UserInfo(phoneNumber, name, city.trim().toUpperCase(), state.trim().toUpperCase()));
           if (registeredUsers.length > 0) {
             fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
-            if (err) {
+              if (err) {
                 return console.log(err);
-            }
-            console.log("The file was saved!");
+              }
+              console.log('The file was saved!');
+            });
+          }
+        } else if (regUser.length === 1) {
+          const existingUser = regUser[0];
+          if (existingUser.city !== city || existingUser.name !== name) {
+            existingUser.name = name;
+            existingUser.city = city;
+          }
+
+          if (registeredUsers.length > 0) {
+            fs.writeFile('./src/server/config/quizRegisteredUsers.json', JSON.stringify(registeredUsers), 'utf-8', function (err) {
+              if (err) {
+                return console.log(err);
+              }
+              console.log('The file was saved!');
             });
           }
         }
