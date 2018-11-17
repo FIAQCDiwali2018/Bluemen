@@ -34,10 +34,23 @@
   height: auto;
 }
 
-.sidebar {
+.totalSidebar {
   width: 576px;
   background: #eee;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  position: relative;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar {
+  width: 576px;
+  background: #eee;
+  padding: 2px;
   display: flex;
   flex-direction: column;
   list-style: none;

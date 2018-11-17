@@ -38,14 +38,16 @@ class TotalStats extends PureComponent<Props, State> {
     return (
       <div>
         <PoseGroup preEnterPose="preEnter">
-          <Parent pose="open" key={'stats'} className="sidebar">
+          <Parent pose="open" key={'stats'} className="totalSidebar">
             <PoseGroup preEnterPose="preEnter">
               <Child className="item" key={'aUserRegisteredChild'}><AnswerOption key="userRegistered"
                                                                                  label="Total User Registered"
                                                                                  answerContent={totalRegisteredUsers}/></Child>
+              <span key={'title'}>First Top Fastest Overall</span>
               {first3Fastest.filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
                 <Child className="item" key={`aUserRegisteredFastest${index}`}><AnswerOption
-                  key={`aUserRegisteredFastest${index}`} label={person.name} answerContent={person.timeTaken}/></Child>
+                  key={`aUserRegisteredFastest${index}`} label={`${person.name}`}
+                  answerContent={`${person.timeTaken}'s`}/></Child>
               ))}
             </PoseGroup>
           </Parent>
