@@ -105,19 +105,23 @@ class Home extends PureComponent<Props, State> {
   render() {
     const {sections} = this.props;
     return (
-      <div>
+      <div className={'blueMenMain'}>
         <Grid>
           <Row>
             <Col xs={12} md={8}>
               <Row>
                 <Col>
-                  <Header>
+                  <Header className="font-weight-bold textColor">
                     <H1>Blue Men Quiz</H1>
                   </Header>
                   <div>
-                    <ul style = {{fontSize: 'x-large'}}>
-                      <li><span style={{fontSize: 'x-large'}}>TEXT to <b>(667) 771-2333</b></span> with your name and city. e.g Rahul Dravid,Banglore</li>
-                      <li><span style={{fontSize: 'x-large'}}><b>TEXT A or B or C or D</b></span> to answer quiz questions to the same number as mentioned above</li>
+                    <ul style={{fontSize: 'x-large'}} className="textColor">
+                      <li><span className="redLargerText"><b>TEXT to (667) 771-2333</b></span> with your name and city.
+                        e.g Rahul Dravid,Banglore
+                      </li>
+                      <li><span className="redLargerText"><b>TEXT A or B or C or D</b></span> to answer quiz questions
+                        to the same number as mentioned above
+                      </li>
                     </ul>
                   </div>
                 </Col>
@@ -131,14 +135,7 @@ class Home extends PureComponent<Props, State> {
             </Col>
             <Col xs={12} md={4}>
               <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  <WordCloud/>
-                </Col>
-              </Row>
-              <Row className="show-grid">
-                <Col xs={12} md={12}>
-                  &nbsp;
-                </Col>
+                <WordCloud/>
               </Row>
             </Col>
           </Row>

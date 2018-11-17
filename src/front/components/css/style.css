@@ -6,6 +6,28 @@
   text-shadow: 2px 2px 0px rgba(174, 174, 174, 0.2);
 }
 
+/*body {*/
+/*background: url('FIAQC_default_image.jpeg') no-repeat center center fixed!important;*/
+/*-webkit-background-size: cover!important;*/
+/*-moz-background-size: cover!important;*/
+/*-o-background-size: cover!important;*/
+/*background-size: cover!important;*/
+/*}*/
+
+.redLargerText {
+  font-size: larger;
+  color: red;
+}
+
+.textColor {
+  color: #000000;
+}
+
+.first10 {
+  background: #eee;
+  height: auto;
+}
+
 .sidebar {
   width: 576px;
   background: #eee;
@@ -49,5 +71,5 @@
   background: #c8c8a9;
 }
 .buttonsStyle{
-  padding-top: 20px;  
+  padding-top: 20px;
 }

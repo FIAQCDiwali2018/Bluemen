@@ -81,11 +81,11 @@ class BlueMenQuiz extends Component {
                 <Quiz answer={answer} answerOptions={answerOptions} questionId={questionId} question={question}/> : ''}
               {!result ?
                 (<div className="buttonsStyle">
-                  <Button onClick={this.setNextQuestion}>NEXT</Button>
+                  <Button bsSize={'lg'} bsStyle='primary' onClick={this.setNextQuestion}>NEXT</Button>
                   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                  <Button onClick={this.setEndQuiz}>END</Button>
+                  <Button bsSize={'lg'} onClick={this.setEndQuiz}>END</Button>
                 </div>)
-                : <Button onClick={this.restart}>Thank you</Button>}
+                : <Button bsSize={'lg'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
             </Col>
             <Col xs={12} md={!result ? 6 : 12} style={{paddingLeft: 130 + 'px'}}>
               <Top10FastestFinger next={this.setNextQuestion} api={api} result={result} heading={top10Heading}/>
