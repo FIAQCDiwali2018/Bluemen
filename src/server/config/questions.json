@@ -221,16 +221,6 @@
       "answer":"D"
     },
 	{
-      "question":"In which state does the Snake River originate?",
-      "options":{
-        "A":"Colorado",
-        "B":"Wyoming",
-        "C":"Iowa",
-        "D":"Idaho"
-      },
-      "answer":"B"
-    },
-	{
       "question":"How many states are there in the United States of America?",
       "options":{
         "A":"49",
@@ -259,6 +249,66 @@
             "D":"California"
           },
           "answer":"A"
+        },
+        {
+          "question":"What is the birthplace of Rajnikant?",
+          "options":{
+            "A":"Chennai",
+            "B":"Hydrabad",
+            "C":"Bangalore",
+            "D":"Mumbai"
+          },
+          "answer":"C"
+        },
+		{
+          "question":"What’s the nick name of Narendra Modi?",
+          "options":{
+            "A":"PM",
+            "B":"NM",
+            "C":"MaMo",
+            "D":"NaMo"
+          },
+          "answer":"D"
+        },
+		{
+          "question":"How many participants do you think are performing tonight?",
+          "options":{
+            "A":"150",
+            "B":"200",
+            "C":"250",
+            "D":"290+"
+          },
+          "answer":"D"
+        },
+		{
+          "question":"How many people do you think will watch tonight show Live in audience ?",
+          "options":{
+            "A":"500-700",
+            "B":"701-800",
+            "C":"800-999",
+            "D":"1000+"
+          },
+          "answer":"D"
+        },
+		{
+          "question":"Our Guest of Honor for tonight show is?",
+          "options":{
+            "A":"Mayor",
+            "B":"Senator",
+            "C":"Industrialist",
+            "D":"Ambassador"
+          },
+          "answer":"B"
+        },
+		{
+          "question":"Average age of Indian girls getting married in USA?",
+          "options":{
+            "A":"20",
+            "B":"25",
+            "C":"30",
+            "D":"35"
+          },
+          "answer":"B"
         }
     ]
 }

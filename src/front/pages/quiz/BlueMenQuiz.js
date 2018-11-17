@@ -77,7 +77,7 @@ class BlueMenQuiz extends Component {
   render() {
     const {result, answer, questionId, answerOptions, question, showAns} = this.state;
     const api = result ? '/endQuiz' : '/questions/current';
-    const top10Heading = result ? 'Overall top 10 fastest responses are:' : 'Current fastest respones are:';
+    const top10Heading = result ? 'Overall top 10 fastest responses are:' : 'Current fastest responses are:';
     return (
       <div className="QuizApp">
         <Grid>
@@ -90,8 +90,8 @@ class BlueMenQuiz extends Component {
                 (<div className="buttonsStyle">
                   <Button bsSize={'lg'} bsStyle='primary' onClick={this.setNextQuestion}>NEXT</Button>
                   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                  <Button bsSize={'lg'} onClick={this.showAns}>SHOW</Button>
-                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END</Button>
+                  <Button bsSize={'lg'} onClick={this.showAns}>SHOW ANSWER</Button>
+                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END QUIZ</Button>
                 </div>)
                 : <Button bsSize={'lg'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
             </Col>
