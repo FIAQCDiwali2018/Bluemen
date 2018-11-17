@@ -239,9 +239,26 @@
         "D":"52"
       },
       "answer":"B"
-    }
-
-
-
-  ]
+    },
+    {
+        "question":" If it is 6.00 a.m. in New York what is the time in Los Angeles?",
+        "options":{
+          "A":"6.00 a.m",
+          "B":"5.00 a.m",
+          "C":"3.00 a.m",
+          "D":"4.00 a.m"
+        },
+        "answer":"C"
+      },
+      {
+          "question":"Which is the 49th State of USA?",
+          "options":{
+            "A":"Alaska",
+            "B":"Georgia",
+            "C":"Texas",
+            "D":"California"
+          },
+          "answer":"A"
+        }
+    ]
 }
