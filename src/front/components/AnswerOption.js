@@ -7,7 +7,7 @@ const style = {
   backgroundImage: `url(${logo})`,
   backgroundRepeat: 'no-repeat',
   height: '100px',
-  width: '735px'
+  width: '620px'
 };
 
 function AnswerOption(props) {

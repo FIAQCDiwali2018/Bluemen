@@ -4,7 +4,7 @@
 import React, {PureComponent} from 'react';
 import {Link, type Location, type Match, NavLink, type RouterHistory} from 'react-router-dom';
 import styled from 'styled-components';
-import {Col, Grid, Row} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
 import BlueMenQuiz from '../quiz/BlueMenQuiz';
 // #endregion
@@ -17,6 +17,11 @@ export type Props = {
   history: RouterHistory,
   ...any,
 };
+
+const Grid = styled('div')`
+  margin: 0px 50px 0px 50px;
+  max-width: 100%;
+`
 
 const Container = styled('div')`
   height: 100%;

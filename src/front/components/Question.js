@@ -10,7 +10,7 @@ const style = {
 };
 
 function Question(props) {
-  return <h1 className="question" style={style}>{props.content}</h1>;
+  return <h2 className="question">{props.content}</h2>;
 }
 
 Question.propTypes = {

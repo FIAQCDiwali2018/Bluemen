@@ -38,21 +38,17 @@ class Top10FastestFinger extends Component {
         <Grid>
           {top10.slice(0, 10).filter(p => p.phoneNumber && p.phoneNumber !== '').map((person, index) => (
             <Row key={person.name + 'person' + index}>
-              <Col xs={12} md={3}>
+              <Col xs={1} md={1}>
                 <Well
-                  bsSize="small">${index + 1}</Well>
+                  bsSize="small">{index + 1}</Well>
               </Col>
-              <Col xs={12} md={3}>
+              <Col xs={7} md={7}>
                 <Well
-                  bsSize="small">{person.name}</Well>
+                  bsSize="small">{person.name} / {person.phoneNumber}</Well>
               </Col>
-              <Col xs={12} md={3}>
+              <Col xs={2} md={2}>
                 <Well
-                  bsSize="small">{person.phoneNumber}</Well>
-              </Col>
-              <Col xs={12} md={3}>
-                <Well
-                  bsSize="small">{person.timeTaken / 1000}</Well>
+                  bsSize="small">{(person.timeTaken / 1000).toFixed(2)}</Well>
               </Col>
             </Row>
           ))}
