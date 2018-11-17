@@ -231,12 +231,11 @@ const expressServer = (app = null, isDev = false) => {
       const userData = req.body.Body;
       const phoneNumber = req.body.From;
       if (userData.toUpperCase().length > 2) {
-        const userDetails = userData.split(';');
+        const userDetails = userData.split(',');
         const name = userDetails[0];
         let city = userDetails[1];
         const state = '';
         const regUser = registeredUsers.filter(cnt => cnt.phoneNumber === req.body.From);
-
         if (regUser.length < 1) {
           if (city === undefined || city == null) {
             city = 'UNKNOWN';

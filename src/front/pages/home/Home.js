@@ -116,7 +116,7 @@ class Home extends PureComponent<Props, State> {
                   </Header>
                   <div>
                     <ul style = {{fontSize: 'large'}}>
-                      <li><span style={{fontSize: 'larger'}}>TEXT to <b>(667) 771-2333</b></span> with your name and city. e.g Rahul Dravid;Banglore</li>
+                      <li><span style={{fontSize: 'larger'}}>TEXT to <b>(667) 771-2333</b></span> with your name and city. e.g Rahul Dravid,Banglore</li>
                       <li><span style={{fontSize: 'larger'}}><b>TEXT A or B or C or D</b></span> to answer quiz questions to the same number as mentioned above</li>
                     </ul>
                   </div>
