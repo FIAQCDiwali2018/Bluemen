@@ -18,8 +18,14 @@ const injectGlobalStyle = () => injectGlobal`
 
   .answer {
     color: white;
-    font-size: 2.3rem;
-    padding: 13px 0 0 30px;
+    font-size: 1.3rem;
+    padding: 14px 0 0 30px;
+  }
+
+  .question {
+    color: blue;
+    font-size: 2.6rem;
+    padding: 0 0 0 2px;
   }
 
   a {
