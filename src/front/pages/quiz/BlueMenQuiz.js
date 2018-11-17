@@ -21,6 +21,7 @@ class BlueMenQuiz extends Component {
         question: questionObject.question,
         answerOptions: questionObject.options,
         answer: questionObject.answer,
+        showAns: false
       });
     }
   };
@@ -33,6 +34,10 @@ class BlueMenQuiz extends Component {
     callApi('/questions/next')
       .then(res => this.updateState(res))
       .catch(err => console.log(err));
+  };
+
+  showAns = () => {
+    this.setState({showAns: true});
   };
 
   restart = () => {
@@ -50,7 +55,8 @@ class BlueMenQuiz extends Component {
       question: '',
       answerOptions: {A: '', B: '', C: '', D: ''},
       answer: '',
-      result: false
+      result: false,
+      showAns: false
     };
   }
 
@@ -69,7 +75,7 @@ class BlueMenQuiz extends Component {
   }
 
   render() {
-    const {result, answer, questionId, answerOptions, question} = this.state;
+    const {result, answer, questionId, answerOptions, question, showAns} = this.state;
     const api = result ? '/endQuiz' : '/questions/current';
     const top10Heading = result ? 'Blue Men Top 10 fasted finger:' : 'Current fasted finger are as follows:';
     return (
@@ -78,12 +84,14 @@ class BlueMenQuiz extends Component {
           <Row>
             <Col xs={12} md={6}>
               {questionId > 0 && !result ?
-                <Quiz answer={answer} answerOptions={answerOptions} questionId={questionId} question={question}/> : ''}
+                <Quiz answer={answer} answerOptions={answerOptions} questionId={questionId} question={question}
+                      showAns={showAns}/> : ''}
               {!result ?
                 (<div className="buttonsStyle">
                   <Button bsSize={'lg'} bsStyle='primary' onClick={this.setNextQuestion}>NEXT</Button>
                   &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                  <Button bsSize={'lg'} onClick={this.setEndQuiz}>END</Button>
+                  <Button bsSize={'lg'} onClick={this.showAns}>SHOW</Button>
+                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END</Button>
                 </div>)
                 : <Button bsSize={'lg'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
             </Col>

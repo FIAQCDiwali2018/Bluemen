@@ -14,6 +14,12 @@
 /*background-size: cover!important;*/
 /*}*/
 
+.item.showAns {
+  -webkit-box-shadow: 0 0 20px blue;
+  -moz-box-shadow: 0 0 20px blue;
+  box-shadow: 0 0 20px blue;
+}
+
 .redLargerText {
   font-size: larger;
   color: red;

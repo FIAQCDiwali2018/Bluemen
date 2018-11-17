@@ -150,6 +150,10 @@ function getOverallTop10() {
   }
 }
 
+function getTotalStats() {
+  return {first3Fastest: getOverallTop10().slice(0, 3), totalRegisteredUsers: registeredUsers.length};
+}
+
 // $FlowIgnore
 const expressServer = (app = null, isDev = false) => {
   if (!app) {
@@ -188,6 +192,11 @@ const expressServer = (app = null, isDev = false) => {
 
   app.get('/results', (req, res) => {
       res.send(getOverallTop10());
+    },
+  );
+
+  app.get('/totalStats', (req, res) => {
+      res.send(getTotalStats());
     },
   );
 

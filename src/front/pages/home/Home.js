@@ -8,6 +8,7 @@ import {Col, Row} from 'react-bootstrap';
 import WordCloud from '../../pages/word-cloud';
 import BlueMenQuiz from '../quiz/BlueMenQuiz';
 import './../../components/css/style.css';
+import TotalStats from "../TotalStats/TotalStats";
 // #endregion
 
 // #region flow types
@@ -135,7 +136,12 @@ class Home extends PureComponent<Props, State> {
             </Col>
             <Col xs={12} md={4}>
               <Row className="show-grid">
-                <WordCloud/>
+                <Col>
+                  <WordCloud/>
+                </Col>
+                <Col>
+                  <TotalStats/>
+                </Col>
               </Row>
             </Col>
           </Row>

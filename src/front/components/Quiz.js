@@ -59,21 +59,30 @@ const itemProps = {
   }
 };
 
+export const Parent = posed.ul(GridProps);
+export const Child = posed.li(itemProps);
+
 
 function Quiz(props) {
-  const {questionId, answerOptions, question} = props;
+  const {questionId, answerOptions, question, answer, showAns} = props;
   const {A, B, C, D} = answerOptions;
-  const Parent = posed.ul(GridProps);
-  const Child = posed.li(itemProps);
   return (
     <PoseGroup preEnterPose="preEnter">
       <Parent pose="open" key={questionId} className="sidebar">
         <Question content={question}/>
         <PoseGroup preEnterPose="preEnter">
-          <Child className="item" key={'aChild'}><AnswerOption key="A" label="A" answerContent={A}/></Child>
-          <Child className="item" key={'bChild'}><AnswerOption key="B" label="B" answerContent={B}/></Child>
-          <Child className="item" key={'cChild'}><AnswerOption key="C" label="C" answerContent={C}/></Child>
-          <Child className="item" key={'dChild'}><AnswerOption key="D" label="D" answerContent={D}/></Child>
+          <Child className={`item ${'A' === answer && showAns ? 'showAns' : ''}`} key={'aChild'}><AnswerOption key="A"
+                                                                                                               label="A"
+                                                                                                               answerContent={A}/></Child>
+          <Child className={`item ${'B' === answer && showAns ? 'showAns' : ''}`} key={'bChild'}><AnswerOption key="B"
+                                                                                                               label="B"
+                                                                                                               answerContent={B}/></Child>
+          <Child className={`item ${'C' === answer && showAns ? 'showAns' : ''}`} key={'cChild'}><AnswerOption key="C"
+                                                                                                               label="C"
+                                                                                                               answerContent={C}/></Child>
+          <Child className={`item ${'D' === answer && showAns ? 'showAns' : ''}`} key={'dChild'}><AnswerOption key="D"
+                                                                                                               label="D"
+                                                                                                               answerContent={D}/></Child>
         </PoseGroup>
       </Parent>
     </PoseGroup>
@@ -86,6 +95,7 @@ Quiz.propTypes = {
   answerOptions: PropTypes.object.isRequired,
   question: PropTypes.string.isRequired,
   questionId: PropTypes.number.isRequired,
+  showAns: PropTypes.bool.isRequired,
 };
 
 export default Quiz;
