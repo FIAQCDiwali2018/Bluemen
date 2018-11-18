@@ -20,6 +20,85 @@
   box-shadow: 0 0 20px blue;
 }
 
+.item.showAns {
+  background-color: #004A7F;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: glowing 1500ms infinite;
+  -moz-animation: glowing 1500ms infinite;
+  -o-animation: glowing 1500ms infinite;
+  animation: glowing 1500ms infinite;
+}
+
+@-webkit-keyframes glowing {
+  0% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+  50% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 40px blue;
+  }
+  100% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+}
+
+@-moz-keyframes glowing {
+  0% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+  50% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 40px blue;
+  }
+  100% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+}
+
+@-o-keyframes glowing {
+  0% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+  50% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 40px blue;
+  }
+  100% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+  50% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 40px blue;
+  }
+  100% {
+    background-color: blue;
+    -webkit-box-shadow: 0 0 3px blue;
+  }
+}
+
 .redLargerText {
   font-size: larger;
   color: red;
@@ -37,7 +116,7 @@
 .totalSldebarTop10{
   width: 370px;
   background: #eee;
-  padding: 30px;
+  padding: 2px;
   display: flex;
   flex-direction: column;
   list-style: none;

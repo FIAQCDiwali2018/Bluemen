@@ -116,7 +116,7 @@ class Home extends PureComponent<Props, State> {
                     <H1>The Fun Quiz</H1>
                   </Header>
                   <div>
-                    <ul style={{fontSize: 'x-large'}} className="textColor">
+                    <ul style={{fontSize: 'xx-large'}} className="textColor">
                       <li><span className="redLargerText"><b>TEXT to (667) 771-2333</b></span> with your name and city.
                         e.g Rahul Dravid,Banglore
                       </li>
