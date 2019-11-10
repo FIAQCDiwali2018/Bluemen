@@ -127,9 +127,7 @@ class Home extends PureComponent<Props, State> {
                   </div>
                 </Col>
               </Row>
-              <Row>
-                &nbsp;
-              </Row>
+              <Row>&nbsp;<br/><br/><br/><br/><br/></Row>
               <Row>
                 <BlueMenQuiz/>
               </Row>

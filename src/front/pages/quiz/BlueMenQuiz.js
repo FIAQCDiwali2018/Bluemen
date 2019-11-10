@@ -90,12 +90,12 @@ class BlueMenQuiz extends Component {
                 (<div className="buttonsStyle">
                   <Button bsSize={'lg'} bsStyle='primary' onClick={this.setNextQuestion}>NEXT</Button>
                   &nbsp;  &nbsp;  &nbsp;
-                  <Button bsSize={'lg'} onClick={this.showAns}>SHOW ANSWER</Button>
-                  <Button bsSize={'lg'} style={{float: 'right'}} onClick={this.setEndQuiz}>END</Button>
+                  <Button bsSize={'lg'} bsStyle="secondary" onClick={this.showAns}>SHOW ANSWER</Button>
+                  <Button bsSize={'large'} bsStyle="secondary" style={{float: 'right'}} onClick={this.setEndQuiz}>END</Button>
                 </div>)
-                : <Button bsSize={'lg'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
+                : <Button bsSize={'large'} bsStyle='primary' onClick={this.restart}>Thank you</Button>}
             </Col>
-            <Col xs={12} md={!result ? 6 : 12} style={{paddingLeft: 130 + 'px'}}>
+            <Col xs={12} md={!result ? 6 : 12} style={{paddingLeft: 150 + 'px'}}>
               <Top10FastestFinger next={this.setNextQuestion} api={api} result={result} heading={top10Heading}/>
             </Col>
           </Row>
